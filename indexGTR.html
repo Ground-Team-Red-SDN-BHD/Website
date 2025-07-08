@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTR Ramp Data Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="#">
+            <img src="logoGTR.png" alt="GTR Logo" class="logo">
+        </a>
+        <h1 class="header-title">Ramp Data Dashboard</h1>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#memo">Memo</a></li>
+            <li><a href="#looker-studio-section">Looker Studio</a></li>
+            <li><a href="#tableau-section">Tableau Dashboards</a></li>
+            <li><a href="#video-tutorial">Video Tutorial</a></li>
+            <li><a href="#data-insights">Live Data</a></li>
+        </ul>
+    </nav>
+    
+    <main class="dashboard-main">
+        <section id="memo" class="dashboard-section">
+            <div class="section-header-content">
+                <i class="fas fa-bell section-icon"></i>
+                <h2>Memo GTR</h2>
+                <p class="section-subheading">Any Update At GTR On This Platform</p>
+            </div>
+            </section>
+
+        <section id="looker-studio-section" class="dashboard-section">
+            <div class="section-header-content">
+                <i class="fas fa-chart-line section-icon"></i>
+                <p class="section-subheading">Live Dashboard Collection</p>
+                <h2>Looker Studio Dashboards</h2>
+            </div>
+            <div class="slider-container"> 
+                <div class="slider-grid">
+                    <div class="project-card">
+                        <img src="lookerstudio/performance1.png" alt="Ramp Performance Dashboard" class="dashboard-image">
+                        <div class="card-content">
+                            <h3>Ramp Performance Dashboard</h3>
+                            <p class="project-category">Live dashboard</p>
+                            <div class="button-group">
+                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance1.png">Details</a>
+                                <a href="https://lookerstudio.google.com/reporting/1Glc4purfK_bXNr4XWFwh1yvwnx1pM_VN" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="lookerstudio/performance2.png" alt="Final Ramp Performance" class="dashboard-image">
+                        <div class="card-content">
+                            <h3>Final Ramp Performance</h3>
+                            <p class="project-category">Summary</p>
+                            <div class="button-group">
+                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance2.png">Details</a>
+                                <a href="https://lookerstudio.google.com/reporting/8dbbc9c4-71cf-4cd3-9455-d10738f39d72" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="lookerstudio/performance3.png" alt="Morning Wave" class="dashboard-image">
+                        <div class="card-content">
+                            <h3>Morning Wave</h3>
+                            <p class="project-category">Data Morning Wave</p>
+                            <div class="button-group">
+                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance3.png">Details</a>
+                                <a href="https://lookerstudio.google.com/reporting/2aac344a-6676-48a3-9c0e-685907a93f4b" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="lookerstudio/performance4.png" alt="Dashboard 4" class="dashboard-image">
+                        <div class="card-content">
+                            <h3>On-Time Performance</h3>
+                            <p class="project-category">OTP Analysis</p>
+                            <div class="button-group">
+                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance4.png">Details</a>
+                                <a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="lookerstudio/performance5.png" alt="Dashboard 5" class="dashboard-image">
+                        <div class="card-content">
+                            <h3>Resource Allocation</h3>
+                            <p class="project-category">Management</p>
+                            <div class="button-group">
+                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance5.png">Details</a>
+                                <a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="lookerstudio/performance6.png" alt="Dashboard 6" class="dashboard-image">
+                        <div class="card-content">
+                            <h3>Safety Compliance</h3>
+                            <p class="project-category">Audit</p>
+                            <div class="button-group">
+                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance6.png">Details</a>
+                                <a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slide-btn prev-slide" aria-label="Previous Slide">❮</button>
+                <button class="slide-btn next-slide" aria-label="Next Slide">❯</button>
+                <div class="slider-dots-container"></div>
+            </div>
+        </section>
+        
+        <section id="tableau-section" class="dashboard-section">
+            <div class="section-header-content">
+                <i class="fas fa-images section-icon"></i>
+                <p class="section-subheading">Tableau Dashboard Collection</p>
+                <h2 id="dynamic-date"></h2>
+            </div>
+            <div class="project-container"> 
+                <div class="project-card">
+                    <img src="dashboard/dashboard1.png" alt="Ground Command Center" class="dashboard-image">
+                    <div class="card-content">
+                        <h3>Ground Command Center</h3>
+                        <p class="project-category">Ground OPS OTP</p>
+                        <a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard1.png">View Details</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="dashboard/dashboard2.png" alt="Analisis Bulanan" class="dashboard-image">
+                    <div class="card-content">
+                        <h3>Morning Wave</h3>
+                        <p class="project-category">4AM to 8.59AM</p>
+                        <a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard2.png">View Details</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="dashboard/dashboard3.png" alt="Prestasi Kakitangan" class="dashboard-image">
+                    <div class="card-content">
+                        <h3>NMC Daily OTP</h3>
+                        <p class="project-category">Daily OTP Dashboard</p>
+                        <a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard3.png">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-tutorial" class="dashboard-section">
+            <div class="section-header-content">
+                <i class="fas fa-video section-icon"></i>
+                <h2>Video Tutorial</h2>
+                <p class="section-subheading">Watch the video below to learn how to use this dashboard</p>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/-h_ibgZKimk?si=mh2FJAoHxEgZR0De" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="data-insights" class="dashboard-section">
+            <div class="section-header-content">
+                <i class="fas fa-table section-icon"></i>
+                <p class="section-subheading">Interactive Table</p>
+                <h2>Live Data (Google Sheets)</h2>
+            </div>
+            <div class="google-sheet-container">
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTMTJp5C9qja2CNrT7bo7C35OKiY_la20FYhC55xf9rWT-4ycDefddaGxytL9pZm7CuT-FCqwY2DrR5/pubhtml?gid=0&single=true" class="google-sheet-iframe" frameborder="0"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> GTR. All Rights Reserved.</p>
+    </footer>
+
+    <div id="imageModal" class="modal">
+        <span class="close-modal-btn">×</span>
+        <img class="modal-content" id="modalImage" alt="Dashboard View">
+        <div class="caption-container">
+            <div id="modal-caption" class="modal-caption"></div>
+            <a id="downloadLink" class="btn-download" href="#" download>Download Image</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
