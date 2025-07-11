@@ -128,4 +128,77 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.classList.contains('active')) closeModal(); });
 
+    // [TAMBAH INI] Letakkan kod ini di dalam 'DOMContentLoaded'
+
+    // --- LOGIK SLIDER UNTUK HIGHLIGHTS (AUTOPLAY) ---
+    const highlightSlider = document.querySelector('#highlights .highlight-slider-grid');
+    if (highlightSlider) {
+    const slides = highlightSlider.querySelectorAll('.highlight-slide');
+    const nextBtn = document.querySelector('.next-slide-h');
+    const prevBtn = document.querySelector('.prev-slide-h');
+    const dotsContainer = document.querySelector('.slider-dots-container-h');
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+    let autoplayInterval;
+
+    function goToHighlight(index) {
+        sliderGrid.style.transform = `translateX(-${index * 100}%)`;
+        currentIndex = index;
+        updateHighlightDots();
+    }
+
+    function updateHighlightDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('dot-h');
+            if (i === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                goToHighlight(i);
+                resetAutoplay();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextHighlight() {
+        let nextIndex = (currentIndex + 1) % totalSlides;
+        goToHighlight(nextIndex);
+    }
+    
+    function prevHighlight() {
+        let prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        goToHighlight(prevIndex);
+    }
+
+    function startAutoplay() {
+        stopAutoplay(); // Pastikan tiada autoplay lain berjalan
+        autoplayInterval = setInterval(nextHighlight, 5000); // Tukar slaid setiap 5 saat
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+    
+    function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+
+    if (totalSlides > 0) {
+        const sliderContainer = document.querySelector('.highlight-slider-container');
+        nextBtn.addEventListener('click', () => { nextHighlight(); resetAutoplay(); });
+        prevBtn.addEventListener('click', () => { prevHighlight(); resetAutoplay(); });
+
+        // Jeda autoplay apabila tetikus berada di atas slider
+        sliderContainer.addEventListener('mouseenter', stopAutoplay);
+        sliderContainer.addEventListener('mouseleave', startAutoplay);
+        
+        // Mula semuanya
+        updateHighlightDots();
+        startAutoplay();
+    }
+}
+
 });
