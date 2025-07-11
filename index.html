@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTR Ramp Data Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="faviGTR.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -15,16 +14,21 @@
         <a href="#">
             <img src="logoGTR.png" alt="GTR Logo" class="logo">
         </a>
-        <h1 class="header-title">Ground Team Red</h1>
+        <h1 class="header-title">Ramp Data Dashboard</h1>
     </header>
 
     <nav class="main-nav">
-        <ul>
-            <li><a href="#memo">Memo</a></li>
-            <li><a href="#looker-studio-section">Looker Studio</a></li>
-            <li><a href="#tableau-section">Tableau Dashboards</a></li>
-            <li><a href="#video-tutorial">Video Tutorial</a></li>
-            <li><a href="#data-insights">Live Data</a></li>
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+        </button>
+        <ul id="nav-menu">
+        <li><a href="#memo">Memo</a></li>
+        <li><a href="#looker-studio-section">Looker Studio</a></li>
+        <li><a href="#tableau-section">Tableau</a></li>
+        <li><a href="#video-tutorial">Video Tutorial</a></li>
+        <li><a href="#data-insights">Live Data</a></li>
         </ul>
     </nav>
     
@@ -34,8 +38,21 @@
                 <i class="fas fa-bell section-icon"></i>
                 <h2>Memo GTR</h2>
                 <p class="section-subheading">Any Update At GTR On This Platform</p>
+
+                <a href="memo.html" class="btn-view-all">View All Memos</a>
+                
             </div>
-            </section>
+            <div class="memo-container">
+                <div class="memo-item">
+                    <h4><span class="memo-date">10 Jul 2025</span> | Kemas Kini Sistem</h4>
+                    <p>Sistem akan melalui proses penyelenggaraan pada jam 11 malam ini dan dijangka selesai dalam 2 jam. Harap maklum.</p>
+                </div>
+                <div class="memo-item">
+                    <h4><span class="memo-date">09 Jul 2025</span> | Laporan Prestasi Bulanan</h4>
+                    <p>Laporan prestasi untuk bulan Jun kini boleh diakses melalui dashboard Looker Studio di bawah.</p>
+                </div>
+            </div>
+        </section>
 
         <section id="looker-studio-section" class="dashboard-section">
             <div class="section-header-content">
@@ -78,39 +95,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card">
-                        <img src="lookerstudio/performance4.png" alt="Dashboard 4" class="dashboard-image">
-                        <div class="card-content">
-                            <h3>On-Time Performance</h3>
-                            <p class="project-category">OTP Analysis</p>
-                            <div class="button-group">
-                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance4.png">Details</a>
-                                <a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="lookerstudio/performance5.png" alt="Dashboard 5" class="dashboard-image">
-                        <div class="card-content">
-                            <h3>Resource Allocation</h3>
-                            <p class="project-category">Management</p>
-                            <div class="button-group">
-                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance5.png">Details</a>
-                                <a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="lookerstudio/performance6.png" alt="Dashboard 6" class="dashboard-image">
-                        <div class="card-content">
-                            <h3>Safety Compliance</h3>
-                            <p class="project-category">Audit</p>
-                            <div class="button-group">
-                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance6.png">Details</a>
-                                <a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <button class="slide-btn prev-slide" aria-label="Previous Slide">❮</button>
                 <button class="slide-btn next-slide" aria-label="Next Slide">❯</button>
@@ -147,7 +131,7 @@
                     <img src="dashboard/dashboard3.png" alt="Prestasi Kakitangan" class="dashboard-image">
                     <div class="card-content">
                         <h3>NMC Daily OTP</h3>
-                        <p class="project-category">Update Everyday (Yesterday)</p>
+                        <p class="project-category">Update Everyday (yesterday)</p>
                         <p class="project-category">Daily OTP Dashboard</p>
                         <a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard3.png">View Details</a>
                     </div>
@@ -162,7 +146,7 @@
                 <p class="section-subheading">Watch the video below to learn how to use this dashboard</p>
             </div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/-h_ibgZKimk?si=mh2FJAoHxEgZR0De" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </section>
 
@@ -179,7 +163,7 @@
     </main>
 
     <footer class="main-footer">
-        <p>&copy; <span id="current-year"></span> RampData GTR. All Rights Reserved.</p>
+        <p>© <span id="current-year"></span> GTR. All Rights Reserved.</p>
     </footer>
 
     <div id="imageModal" class="modal">
