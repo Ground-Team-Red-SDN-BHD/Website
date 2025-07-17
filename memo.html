@@ -5,14 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Memos - GTR Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="faviGTR.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+    body, html {
+      height: 0%;
+      margin: 0;
+    }
+
+    body {
+      /* Letakkan nama fail gambar anda di sini */
+      background-image: url('pictures/backgroundAA.png');
+
+      /* Untuk pastikan gambar penuh satu skrin */
+      background-size: cover;
+
+      /* Untuk letakkan gambar di tengah */
+      background-position: center;
+
+      /* Untuk elak gambar berulang-ulang */
+      background-repeat: no-repeat;
+
+      /* (Pilihan) Untuk buat gambar statik bila skrol */
+      background-attachment: fixed; 
+    }
+</style>
 </head>
 <body>
 
-    <header class="main-header">
-        <a href="index.html"> <img src="logoGTR.png" alt="GTR Logo" class="logo">
-        </a>
-        <h1 class="header-title">Ramp Data Dashboard</h1>
+    <header class="new-header">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="header-logo"><img src="logoGTR.png" alt="GTR Logo"></a>
+                <nav class="main-navigation">
+                    <a href="index.html#memo">Memo</a>
+                    <a href="index.html#looker-studio-section">Looker Studio</a>
+                    <a href="index.html#tableau-section">Tableau</a>
+                    <a href="index.html#tiktok-highlights">TikTok</a>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </button>
+            </div>
+        </div>
+        <nav id="mobile-menu" class="mobile-nav">
+             <a href="index.html#memo">Memo</a>
+             <a href="index.html#looker-studio-section">Looker Studio</a>
+             <a href="index.html#tableau-section">Tableau</a>
+             <a href="index.html#tiktok-highlights">TikTok</a>
+        </nav>
     </header>
 
     <main class="dashboard-main">
@@ -25,22 +72,10 @@
             </div>
             
             <div class="memo-container">
-                <div class="memo-item">
-                    <h4><span class="memo-date">10 Jul 2025</span> | Kemas Kini Sistem</h4>
-                    <p>Sistem akan melalui proses penyelenggaraan pada jam 11 malam ini dan dijangka selesai dalam 2 jam. Sebarang kesulitan amat dikesali. Harap maklum.</p>
-                </div>
-                <div class="memo-item">
-                    <h4><span class="memo-date">09 Jul 2025</span> | Laporan Prestasi Bulanan</h4>
-                    <p>Laporan prestasi untuk bulan Jun kini boleh diakses melalui dashboard Looker Studio di bawah. Sila rujuk dashboard masing-masing untuk maklumat lanjut.</p>
-                </div>
-                <div class="memo-item">
-                    <h4><span class="memo-date">05 Jul 2025</span> | Prosedur Keselamatan Baru</h4>
-                    <p>Mulai 10 Julai 2025, semua kakitangan dikehendaki mematuhi prosedur keselamatan baru yang telah diedarkan melalui emel. Sesi taklimat akan diadakan pada hari Jumaat ini.</p>
-                </div>
-                 <div class="memo-item">
-                    <h4><span class="memo-date">01 Jul 2025</span> | Selamat Datang ke Portal Baru</h4>
-                    <p>Selamat datang ke portal dashboard GTR yang baru! Portal ini direka untuk memudahkan akses kepada data dan maklumat terkini. Sila rujuk video tutorial untuk panduan.</p>
-                </div>
+                <div class="memo-item"><h4><span class="memo-date">16 Jul 2025</span> | Kemas Kini Sistem</h4><p>Sistem akan melalui proses penyelenggaraan pada jam 11 malam ini dan dijangka selesai dalam 2 jam. Sebarang kesulitan amat dikesali. Harap maklum.</p></div>
+                <div class="memo-item"><h4><span class="memo-date">15 Jul 2025</span> | Laporan Prestasi Bulanan</h4><p>Laporan prestasi untuk bulan Jun kini boleh diakses melalui dashboard Looker Studio di bawah. Sila rujuk dashboard masing-masing.</p></div>
+                <div class="memo-item"><h4><span class="memo-date">12 Jul 2025</span> | Prosedur Keselamatan Baru</h4><p>Mulai 15 Julai 2025, semua kakitangan dikehendaki mematuhi prosedur keselamatan baru yang telah diedarkan melalui emel.</p></div>
+                <div class="memo-item"><h4><span class="memo-date">10 Jul 2025</span> | Selamat Datang ke Portal Baru</h4><p>Selamat datang ke portal dashboard GTR yang baru! Portal ini direka untuk memudahkan akses kepada data dan maklumat terkini.</p></div>
             </div>
         </section>
 
@@ -49,27 +84,27 @@
             <h2>MANUALS</h2>
             </div>
             <div class="manuals-grid">
-                <a href="#" class="manual-item">
+                <a href="https://drive.google.com/drive/folders/1ocx6Ne_zEnxzxt5pJYJDgo6vkRiA8siK" class="manual-item">
                 <i class="fas fa-file-alt"></i>
                 <span>ICAO MANUAL</span>
                 </a>
-                <a href="#" class="manual-item">
+                <a href="https://drive.google.com/drive/folders/18-bpvv3ufOyslXUROwPYZU2CIjXu3rj4" class="manual-item">
                 <i class="fas fa-file-alt"></i>
                 <span>IATA MANUAL</span>
                 </a>
-                <a href="#" class="manual-item">
+                <a href="https://drive.google.com/drive/folders/19ANepaKCSt2_XmCqnYcUg445YDhMAFIz" class="manual-item">
                 <i class="fas fa-file-alt"></i>
                 <span>GTR MANUAL</span>
                 </a>
-                <a href="#" class="manual-item">
+                <a href="https://drive.google.com/drive/folders/1VFXZI56EMh03gMyjZfp5AP7PEXHydhj8" class="manual-item">
                 <i class="fas fa-file-alt"></i>
                 <span>OTHER MANUAL</span>
                 </a>
-                <a href="#" class="manual-item">
+                <a href="https://drive.google.com/file/d/1i0ntr1jxCTa0NQrOrgcuwFfVQJ5yQ4jn/view" class="manual-item">
                 <i class="fas fa-file-alt"></i>
                 <span>SAFETY POLICY</span>
                 </a>
-                <a href="#" class="manual-item">
+                <a href="https://sites.google.com/airasia.com/reddocs/home?authuser=0" class="manual-item">
                 <i class="fas fa-file-alt"></i>
                 <span>RED DOCS</span>
                 </a>
@@ -90,43 +125,43 @@
         </div>
 
         <div class="forms-grid">
-            <a href="#" class="form-item">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmdhNSban0MFUP3tZBDCXdktNREpFT4gqP0AS0T05U0WKIcg/viewform" class="form-item">
                 <h3>e-Overtime</h3>
                 <div class="form-icon"></div>
             </a>
-            <a href="#" class="form-item">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScNLFYVWsQYBXQWJUq1beV3kJiNv3dvd4T_hmsDm4zZLeKoBw/viewform" class="form-item">
                 <h3>e-ADP</h3>
                 <div class="form-icon"></div>
             </a>
-            <a href="#" class="form-item">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFgrGW-i6AV6qkyPsD7RgLlFDISudYUDBF6r7uuNssY5P4SA/viewform" class="form-item">
                 <h3>e-Briefing</h3>
                 <div class="form-icon"></div>
             </a>
-            <a href="#" class="form-item">
+            <a href="https://gaelidentityserver.gaelenlighten.com/core/login?signin=12dec80f7105695d9c19309eda45b84e#!/home" class="form-item">
                 <h3>Coruson</h3>
                 <div class="form-icon"></div>
             </a>
-            <a href="#" class="form-item">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfr4WpbjDI9ILoH3GjYLtGvYt88oowzM7-cboVXmZawaXv1UA/closedform" class="form-item">
                 <h3>Covid-19 Form</h3>
                 <div class="form-icon"></div>
             </a>
-            <a href="#" class="form-item">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfH9UXHIO43AX39dGnfUMiRxTGSmUGegbubjgM2fuJ9Un7cpQ/viewform" class="form-item">
                 <h3>e-Delay Report</h3>
                 <div class="form-icon"></div>
             </a>
-            <a href="#" class="form-item">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfucsAVGNooIDnWQS-wWM9JQVpP7tKLI9UWhxdtL9sYBPAxJA/viewform" class="form-item">
                 <h3>e-RECONCILE</h3>
                 <div class="form-icon"></div>
             </a>
-            <a href="#" class="form-item">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFgrGW-i6AV6qkyPsD7RgLlFDISudYUDBF6r7uuNssY5P4SA/viewform" class="form-item">
                 <h3>e-LDM</h3>
                 <div class="form-icon"></div>
             </a>
-             <a href="#" class="form-item">
+             <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5Ko9-tV85ewJnNYO6cPgcvQwBBlJfMgibbqZXrQlFgJWcYg/viewform" class="form-item">
                 <h3>e-OFLD (C)</h3>
                 <div class="form-icon"></div>
             </a>
-             <a href="#" class="form-item">
+             <a href="https://docs.google.com/forms/d/e/1FAIpQLScsti4E-Z0hdJh9ji-tGDM7yopsuUiLoNlU-qWAHs1MmhfH6Q/viewform" class="form-item">
                 <h3>e-EDR</h3>
                 <div class="form-icon"></div>
             </a>
@@ -134,7 +169,7 @@
     </div>
 
     <div class="button-wrapper">
-        <a href="#" class="btn-primary">
+        <a href="https://lookerstudio.google.com/reporting/421222e8-f321-4578-873e-335229cc5feb/page/p_wwo0y7xbid?s=oCcpg92gfkY" class="btn-primary">
             <span>RAMP OVERTIME VIEW</span>
         </a>
     </div>
@@ -159,10 +194,10 @@
     </div>
     <div class="e-rim-container">
         <div class="e-rim-sheet">
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR_EXAMPLE_SHEET_ID/pubhtml?widget=true&amp;headers=false"></iframe>
+            <iframe src="https://docs.google.com/spreadsheets/d/1WX8KfHsIZUGDHC7H352WvffIBXts2T45eb1KLVa0gcA/edit?gid=0#gid=0"></iframe>
         </div>
         <div class="e-rim-new-items">
-            <a href="#" class="form-item new-item">
+            <a href="https://drive.google.com/drive/folders/1l22oASMJRm08gpcUVA2gTgN91XbutEPJ" class="form-item new-item">
                 <div class="new-badge">New!</div>
                 <h3>e-RIM (82)</h3>
                 <div class="form-icon"></div>
@@ -178,9 +213,9 @@
 
 <section id="quick-links" class="dashboard-section flush">
     <div class="quick-links-container">
-        <a href="#" class="btn-quick-link">GTR Employee Handbook</a>
-        <a href="#" class="btn-quick-link">HR Portal</a>
-        <a href="#" class="btn-quick-link">Redcons</a>
+        <a href="https://drive.google.com/file/d/14jzG86rW3chDn2r-xIqO4jGVmStMol81/view" class="btn-quick-link">GTR Employee Handbook</a>
+        <a href="https://sites.google.com/groundteamred.com/hrportal/" class="btn-quick-link">HR Portal</a>
+        <a href="https://sites.google.com/airasia.com/the-allstar-playbook/redicons" class="btn-quick-link">Redcons</a>
     </div>
 </section>
 
@@ -191,7 +226,7 @@
         </div>
         <div class="info-body">
             <div class="qr-container">
-                <img src="path/to/pitstop_qr.png" alt="QR Code for Pitstop Clock In/Out">
+                <img src="pictures/qrpitstop.png" alt="QR Code for Pitstop Clock In/Out">
                 </div>
             <div class="instructions">
                 <h4>Instructions & Information</h4>
@@ -202,7 +237,7 @@
                 </ul>
             </div>
             <div class="button-wrapper">
-            <a href="#" class="btn-primary">
+            <a href="https://scheduling.groundteamred.com/pitstop/#/" class="btn-primary">
             <span>Go to Pitstop Form</span>
             </a>
         </div>
@@ -217,7 +252,7 @@
         </div>
         <div class="info-body">
             <div class="qr-container">
-                <img src="path/to/airport_pass_qr.png" alt="QR Code for Airport Pass">
+                <img src="pictures/qrairportpass.png" alt="QR Code for Airport Pass">
                  </div>
             <div class="instructions">
                 <h4>Instructions & Information</h4>
@@ -232,7 +267,7 @@
                 </ul>
             </div>
             <div class="button-wrapper">
-            <a href="#" class="btn-primary">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSehRhey4c0sfZsltMKcayfahVjlIu9nb5OYpCMTjnvovBqRLA/viewform" class="btn-primary">
             <span>Go to Airport Pass Form</span>
             </a>
         </div>
@@ -287,8 +322,12 @@
     </main>
 
     <footer class="main-footer">
-        <p>© <span id="current-year">2025</span> GTR. All Rights Reserved.</p>
+        <p>© <span id="current-year"></span> Ramp Data GTR. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        // Skrip ringkas untuk tetapkan tahun pada footer halaman ini
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
