@@ -7,31 +7,125 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="faviGTR.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+    body, html {
+      height: 0%;
+      margin: 0;
+    }
+
+    body {
+      /* Letakkan nama fail gambar anda di sini */
+      background-image: url('pictures/backgroundAA.png');
+
+      /* Untuk pastikan gambar penuh satu skrin */
+      background-size: cover;
+
+      /* Untuk letakkan gambar di tengah */
+      background-position: center;
+
+      /* Untuk elak gambar berulang-ulang */
+      background-repeat: no-repeat;
+
+      /* (Pilihan) Untuk buat gambar statik bila skrol */
+      background-attachment: fixed; 
+    }
+</style>
 </head>
 <body>
 
-    <header class="main-header">
-        <a href="#">
-            <img src="logoGTR.png" alt="GTR Logo" class="logo">
-        </a>
-        <h1 class="header-title">Ramp Data Dashboard</h1>
-    </header>
-
-    <nav class="main-nav">
-        <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu" aria-expanded="false">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
-        </button>
-        <ul id="nav-menu">
-        <li><a href="#memo">Memo</a></li>
-        <li><a href="#looker-studio-section">Looker Studio</a></li>
-        <li><a href="#tableau-section">Tableau</a></li>
-        <li><a href="#video-tutorial">Video Tutorial</a></li>
-        <li><a href="#data-insights">Live Data</a></li>
-        </ul>
+    <header class="new-header">
+    <div class="nav-container">
+        <div class="nav-left">
+            <a href="index.html" class="header-logo"><img src="logoGTR.png" alt="GTR Logo"></a>
+            <nav class="main-navigation">
+                <a href="#memo">Memo <i class="fas fa-chevron-down"></i></a>
+                <a href="#looker-studio-section">Looker Studio <i class="fas fa-chevron-down"></i></a>
+                <a href="#tableau-section">Tableau <i class="fas fa-chevron-down"></i></a>
+                <a href="#video-tutorial">Video Tutorial <i class="fas fa-chevron-down"></i></a>
+                <a href="#tiktok-highlights">TikTok <i class="fas fa-chevron-down"></i></a>
+                <a href="#data-insights">Live Data <i class="fas fa-chevron-down"></i></a>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                <span class="line"></span><span class="line"></span><span class="line"></span>
+            </button>
+        </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-nav">
+        <a href="#memo">Memo</a>
+        <a href="#looker-studio-section">Looker Studio</a>
+        <a href="#tableau-section">Tableau</a>
+        <a href="#video-tutorial">Video Tutorial</a>
+        <a href="#tiktok-highlights">TikTok</a>
+        <a href="#data-insights">Live Data</a>
     </nav>
+</header>
+
+
+
+<div class="welcome-banner-container">
+        <img src="pictures/welcomeAA.jpg" alt="Welcome to our new home!">
+    </div>
+
+    <div class="main-content-wrapper">
+        <main class="feed-column">
+            <div class="hero-slider-container">
+                <div class="hero-slider-grid">
+                    <div class="hero-slide"><img src="pictures/backgroundAA.png" alt="Still Winning Gold"></div>
+                    <div class="hero-slide"><img src="pictures/backgroundAA.png" alt="Safety First"></div>
+                    <div class="hero-slide"><img src="pictures/backgroundAA.png" alt="Teamwork"></div>
+                </div>
+                <div class="hero-slider-dots"></div>
+            </div>
+
+            <article class="feed-post">
+                <div class="post-header">
+                    <img src="circleGTR.png" alt="Profile Picture" class="post-avatar">
+                    <div class="post-author">
+                        <strong>GTR</strong> posted an update.
+                        <span>Now!</span>
+                    </div>
+                    <div class="post-options"><i class="fas fa-thumbtack"></i> Pinned</div>
+                </div>
+                <div class="post-body">
+                    <h3>Welcome To Ground Team Red Website</h3>
+                    <p>Welcome, Allstars! We are thrilled to launch our new digital home. Simplify, Modern, and stay updated with everything on GTR.</p>
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar-column">
+            <div class="widget">
+                <img src="pictures/backgroundAA.png" alt="Allstar Playbook" class="widget-image">
+                <div class="widget-content">
+                    <p class="widget-subtitle">FEATURED PAGE</p>
+                    <h3>Workvivo User Guide</h3>
+                    <a href="#" class="widget-button">Pages</a>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-content">
+                    <p class="widget-subtitle">UPCOMING EVENTS</p>
+                    <ul class="event-list">
+                        <li>
+                            <div class="event-date"><span>JUL</span>15</div>
+                            <div class="event-details"><h4>Change To Workvivo</h4><p>GTR, AirAsia</p></div>
+                        </li>
+                        <li>
+                            <div class="event-date"><span>JUL</span>24</div>
+                            <div class="event-details"><h4>Teh Tarik Talks: Baking</h4><p>Social Club</p></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
     
     <main class="dashboard-main">
         <section id="memo" class="dashboard-section">
@@ -39,18 +133,16 @@
                 <i class="fas fa-bell section-icon"></i>
                 <h2>Memo GTR</h2>
                 <p class="section-subheading">Any Update At GTR On This Platform</p>
-
                 <a href="memo.html" class="btn-view-all">View All Memos</a>
-                
             </div>
             <div class="memo-container">
                 <div class="memo-item">
-                    <h4><span class="memo-date">10 Jul 2025</span> | Kemas Kini Sistem</h4>
-                    <p>Sistem akan melalui proses penyelenggaraan pada jam 11 malam ini dan dijangka selesai dalam 2 jam. Harap maklum.</p>
+                    <h4><span class="memo-date">16 Jul 2025</span> | Kemas Kini Sistem</h4>
+                    <p>Sistem akan melalui proses penyelenggaraan pada jam 11 malam ini. Harap maklum.</p>
                 </div>
                 <div class="memo-item">
-                    <h4><span class="memo-date">09 Jul 2025</span> | Laporan Prestasi Bulanan</h4>
-                    <p>Laporan prestasi untuk bulan Jun kini boleh diakses melalui dashboard Looker Studio di bawah.</p>
+                    <h4><span class="memo-date">15 Jul 2025</span> | Laporan Prestasi Bulanan</h4>
+                    <p>Laporan prestasi untuk bulan Jun kini boleh diakses.</p>
                 </div>
             </div>
         </section>
@@ -63,39 +155,9 @@
             </div>
             <div class="slider-container"> 
                 <div class="slider-grid">
-                    <div class="project-card">
-                        <img src="lookerstudio/performance1.png" alt="Ramp Performance Dashboard" class="dashboard-image">
-                        <div class="card-content">
-                            <h3>Ramp Performance Dashboard</h3>
-                            <p class="project-category">Live dashboard</p>
-                            <div class="button-group">
-                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance1.png">Details</a>
-                                <a href="https://lookerstudio.google.com/reporting/1Glc4purfK_bXNr4XWFwh1yvwnx1pM_VN" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="lookerstudio/performance2.png" alt="Final Ramp Performance" class="dashboard-image">
-                        <div class="card-content">
-                            <h3>Final Ramp Performance</h3>
-                            <p class="project-category">Summary</p>
-                            <div class="button-group">
-                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance2.png">Details</a>
-                                <a href="https://lookerstudio.google.com/reporting/8dbbc9c4-71cf-4cd3-9455-d10738f39d72" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="lookerstudio/performance3.png" alt="Morning Wave" class="dashboard-image">
-                        <div class="card-content">
-                            <h3>Morning Wave</h3>
-                            <p class="project-category">Data Morning Wave</p>
-                            <div class="button-group">
-                                <a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance3.png">Details</a>
-                                <a href="https://lookerstudio.google.com/reporting/2aac344a-6676-48a3-9c0e-685907a93f4b" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="project-card"><img src="lookerstudio/performance1.png" alt="Ramp Performance Dashboard"><div class="card-content"><h3>Ramp Performance</h3><div class="button-group"><a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance1.png">Details</a><a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a></div></div></div>
+                    <div class="project-card"><img src="lookerstudio/performance2.png" alt="Final Ramp Performance"><div class="card-content"><h3>Final Ramp Performance</h3><div class="button-group"><a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance2.png">Details</a><a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a></div></div></div>
+                    <div class="project-card"><img src="lookerstudio/performance3.png" alt="Morning Wave"><div class="card-content"><h3>Morning Wave</h3><div class="button-group"><a href="#" class="btn-project-details open-image-modal" data-image="lookerstudio/performance3.png">Details</a><a href="#" class="btn-project-details live-link" target="_blank" rel="noopener noreferrer">View Live</a></div></div></div>
                 </div>
                 <button class="slide-btn prev-slide" aria-label="Previous Slide">❮</button>
                 <button class="slide-btn next-slide" aria-label="Next Slide">❯</button>
@@ -110,33 +172,9 @@
                 <h2 id="dynamic-date"></h2>
             </div>
             <div class="project-container"> 
-                <div class="project-card">
-                    <img src="dashboard/dashboard1.png" alt="Ground Command Center" class="dashboard-image">
-                    <div class="card-content">
-                        <h3>Ground Command Center</h3>
-                        <p class="project-category">Update Everyday</p>
-                        <p class="project-category">Ground OPS OTP</p>
-                        <a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard1.png">View Details</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="dashboard/dashboard2.png" alt="Analisis Bulanan" class="dashboard-image">
-                    <div class="card-content">
-                        <h3>Morning Wave</h3>
-                        <p class="project-category">Update Everyday</p>
-                        <p class="project-category">4AM to 8.59AM</p>
-                        <a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard2.png">View Details</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="dashboard/dashboard3.png" alt="Prestasi Kakitangan" class="dashboard-image">
-                    <div class="card-content">
-                        <h3>NMC Daily OTP</h3>
-                        <p class="project-category">Update Everyday (yesterday)</p>
-                        <p class="project-category">Daily OTP Dashboard</p>
-                        <a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard3.png">View Details</a>
-                    </div>
-                </div>
+                <div class="project-card"><img src="dashboard/dashboard1.png" alt="Ground Command Center"><div class="card-content"><h3>Ground Command Center</h3><a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard1.png">View Details</a></div></div>
+                <div class="project-card"><img src="dashboard/dashboard2.png" alt="Morning Wave"><div class="card-content"><h3>Morning Wave</h3><a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard2.png">View Details</a></div></div>
+                <div class="project-card"><img src="dashboard/dashboard3.png" alt="NMC Daily OTP"><div class="card-content"><h3>NMC Daily OTP</h3><a href="#" class="btn-project-details open-image-modal" data-image="dashboard/dashboard3.png">View Details</a></div></div>
             </div>
         </section>
 
@@ -144,27 +182,66 @@
             <div class="section-header-content">
                 <i class="fas fa-video section-icon"></i>
                 <h2>Video Tutorial</h2>
-                <p class="section-subheading">Watch the video below to learn how to use this dashboard</p>
             </div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/-h_ibgZKimk?si=-2G3oQX0S58XlRcq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/-h_ibgZKimk?si=uVOIW2CJa0jUBXDr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
 
-        <section id="data-insights" class="dashboard-section">
-            <div class="section-header-content">
-                <i class="fas fa-table section-icon"></i>
-                <p class="section-subheading">Interactive Table</p>
-                <h2>Live Data (Google Sheets)</h2>
-            </div>
-            <div class="google-sheet-container">
-                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTMTJp5C9qja2CNrT7bo7C35OKiY_la20FYhC55xf9rWT-4ycDefddaGxytL9pZm7CuT-FCqwY2DrR5/pubhtml?gid=0&single=true" class="google-sheet-iframe" frameborder="0"></iframe>
-            </div>
-        </section>
+        <section class="partner-section">
+    <div class="container">
+    <h2 class="section-title">Rakan Kongsi Penerbangan Kami</h2>
+    <div class="logo-container">
+
+        <div class="logo-item">
+        <img src="brand/airasia3.png" alt="Logo AirAsia Berhad">
+      </div>
+        <div class="logo-item">
+        <img src="brand/airasia1.png" alt="Logo AirAsia Group">
+      </div>
+      <div class="logo-item">
+        <img src="brand/airasia2.png" alt="Logo AirAsia X">
+      </div>
+      <div class="logo-item">
+        <img src="brand/etihad.png" alt="Etihad Airways">
+      </div>
+      <div class="logo-item">
+        <img src="brand/silkway.png" alt="Logo Silkway Airlines">
+      </div>
+      <div class="logo-item">
+        <img src="brand/yto.png" alt="Logo YTO Airlines">
+      </div>
+      <div class="logo-item">
+        <img src="brand/lanmei.jpg" alt="Logo Lanmei Airlines">
+      </div>
+      <div class="logo-item">
+        <img src="brand/Royalbrunei.jpg" alt="Logo Royal Brunei">
+      </div>
+      <div class="logo-item">
+        <img src="brand/IndiGo.png" alt="Logo IndiGo">
+      </div>
+      <div class="logo-item">
+        <img src="brand/himalaya.png" alt="Logo Himalaya Airlines">
+      </div>
+      <div class="logo-item">
+        <img src="brand/emirates2.png" alt="Logo Etihad">
+      </div>
+      <div class="logo-item">
+        <img src="brand/airnewzealand.jpg" alt="Logo Air New Zealand">
+      </div>
+      <div class="logo-item">
+        <img src="brand/lanmei.jpg" alt="Logo Lanmei Airlines">
+      </div>
+      
+    </div>
+    </div>
+    </section>
+
+
     </main>
 
     <footer class="main-footer">
-        <p>© <span id="current-year"></span> GTR. All Rights Reserved.</p>
+        <p>© <span id="current-year"></span> Ramp Data GTR. All Rights Reserved.</p>
     </footer>
 
     <div id="imageModal" class="modal">
@@ -176,6 +253,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 
 </body>
