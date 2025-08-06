@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="ms">
   <head>
+    <meta charset="UTF-8">
+    <title>Login GTR</title>
     <link rel="icon" href="faviGTR.ico" type="image/x-icon">
     <base target="_top">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="login.js" defer></script>
     <style>
       body { font-family: Arial; text-align: center; margin-top: 50px; background: #f8f9fa; }
       .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-      a.button {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-      }
+      h2 { margin-bottom: 10px; }
+      p { margin-top: 0; }
+      #signInDiv { margin-top: 20px; }
     </style>
   </head>
   <body>
     <div class="container">
       <h2>Sila Log Masuk</h2>
       <p>Log masuk dengan email <strong>@groundteamred.com</strong> untuk teruskan.</p>
-      <a class="button" href="https://accounts.google.com/Logout">Pilih Akaun Google</a>
+      <div id="signInDiv"></div>
     </div>
   </body>
 </html>
+
 
