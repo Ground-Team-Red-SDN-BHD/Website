@@ -6,7 +6,7 @@ function handleCredentialResponse(response) {
 
   if (email.endsWith('@groundteamred.com')) {
     // ✅ Email dibenarkan
-    window.location.href = "https://ground-team-red-sdn-bhd.github.io/AirAsia/";
+    window.location.href = "main.html";
   } else {
     // ❌ Email bukan dari domain GTR
     window.location.href = "unauthorized.html";
@@ -41,4 +41,5 @@ window.onload = function () {
   // Redirect ke dashboard
   window.location.href = "main.html"; // atau index.html jika itu dashboard sebenar
 };
+
 
