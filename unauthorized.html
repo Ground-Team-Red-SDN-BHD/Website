@@ -1,16 +1,69 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <base target="_top">
-    <style>
-      body { font-family: Arial; text-align: center; background-color: #f8f9fa; padding-top: 50px; }
-      .container { background: white; padding: 30px; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    </style>
-  </head>
-  <body>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Akses Ditolak</title>
+  <base target="_top">
+  <link rel="icon" href="faviGTR.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-image: url('pictures/backgroundAA.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      color: #000;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 450px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .container h2 {
+      margin-bottom: 15px;
+      color: #d9534f;
+    }
+
+    .container button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container button:hover {
+      background-color: #c9302c;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
     <div class="container">
       <h2>Akses Ditolak</h2>
       <p>Hanya pengguna dengan email <strong>@groundteamred.com</strong> dibenarkan akses.</p>
+      <button onclick="window.location.href='index.html'">Kembali ke Halaman Utama</button>
     </div>
-  </body>
+  </div>
+</body>
 </html>
