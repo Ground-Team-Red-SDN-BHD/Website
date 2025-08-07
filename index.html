@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; URL='login.html'" />
+
+    <script>
+    // Contoh simpanan login (boleh ganti dengan localStorage, cookie, atau token auth sebenar)
+    const isLoggedIn = localStorage.getItem("userLoggedIn");
+
+    if (isLoggedIn === "true") {
+    // Jika dah login, pergi ke dashboard (atau mana-mana)
+    window.location.href = "main.html"; // tukar ikut fail sebenar
+    } else {
+    // Jika belum login, pergi ke login.html
+    window.location.href = "login.html";
+    }
+    </script>
+    
     <title>Ground Team Red • Official Website</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="faviGTR.ico" type="image/x-icon">
@@ -257,6 +270,7 @@
 
 </body>
 </html>
+
 
 
 
