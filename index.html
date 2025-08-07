@@ -53,12 +53,7 @@
   </div>
 
   <script>
-    // Jika dah login, terus ke main.html
-    const isLoggedIn = localStorage.getItem("userLoggedIn");
-    if (isLoggedIn === "true") {
-      window.location.href = "main.html";
-    }
-
+    
     // Fungsi Google Sign-In bila berjaya login
     function handleCredentialResponse(response) {
       const data = parseJwt(response.credential);
@@ -97,4 +92,5 @@
   </script>
 </body>
 </html>
+
 
