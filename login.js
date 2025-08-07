@@ -34,4 +34,11 @@ window.onload = function () {
   );
 
   google.accounts.id.prompt(); // Auto popup sign in
+
+  // Simpan status login
+  localStorage.setItem("userLoggedIn", "true");
+
+  // Redirect ke dashboard
+  window.location.href = "main.html"; // atau index.html jika itu dashboard sebenar
 };
+
