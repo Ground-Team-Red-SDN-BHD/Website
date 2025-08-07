@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com">
   <link rel="icon" href="faviGTR.ico" type="image/x-icon">
-  <title>Redirecting to login</title>
+  <title>Ground Team Red • Login</title>
 
-  <!-- CSS diletakkan dalam <style> -->
+  <!-- Google Sign-In Library -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   <style>
     body {
       background-image: url('pictures/backgroundAA.png');
@@ -17,24 +20,96 @@
       font-family: Arial, sans-serif;
       color: white;
       text-align: center;
-      margin-top: 50px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 100px auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      color: black;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    #signInDiv {
+      margin-top: 20px;
     }
   </style>
+</head>
+<body>
 
-  <!-- Skrip redirect -->
+  <div class="container" id="loginBox" style="display: none;">
+    <h2>Sila Log Masuk</h2>
+    <p>Log masuk dengan email <strong>@groundteamred.com</strong> untuk teruskan.</p>
+    <div id="signInDiv"></div>
+  </div>
+
+  <p id="statusText">Redirecting...</p>
+
   <script>
+    // Fungsi decode JWT
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    }
+
+    // Fungsi login Google
+    function handleCredentialResponse(response) {
+      const data = parseJwt(response.credential);
+      const email = data.email;
+
+      console.log("Logged in as: " + email);
+
+      if (email.endsWith('@groundteamred.com')) {
+        // ✅ Email dibenarkan
+        localStorage.setItem("userLoggedIn", "true");
+        window.location.href = "main.html";
+      } else {
+        // ❌ Email bukan dari domain GTR
+        window.location.href = "unauthorized.html";
+      }
+    }
+
+    // Bila page ready
     window.onload = function () {
       const isLoggedIn = localStorage.getItem("userLoggedIn");
 
       if (isLoggedIn === "true") {
+        // Jika dah login, pergi ke main.html
         window.location.href = "main.html";
       } else {
-        window.location.href = "login.html";
+        // Jika belum login, tunjuk Google Sign-In
+        document.getElementById("loginBox").style.display = "block";
+        document.getElementById("statusText").style.display = "none";
+
+        google.accounts.id.initialize({
+          client_id: "345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com",
+          callback: handleCredentialResponse
+        });
+
+        google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          { theme: "outline", size: "large" }
+        );
+
+        google.accounts.id.prompt(); // Auto popup
       }
     };
   </script>
-</head>
-<body>
-  <p>Redirecting...</p>
 </body>
 </html>
