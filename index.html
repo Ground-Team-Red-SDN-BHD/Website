@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-signin-client_id" content="345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com">
-  <link rel="icon" href="faviGTR.ico" type="image/x-icon">
   <title>Ground Team Red • Login</title>
-
-  <!-- Google Sign-In Library -->
+  <link rel="icon" href="faviGTR.ico" type="image/x-icon">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <style>
@@ -18,20 +15,18 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
       font-family: Arial, sans-serif;
-      color: white;
       text-align: center;
-      margin: 0;
-      padding: 0;
+      margin-top: 50px;
+      color: white;
     }
 
     .container {
       max-width: 500px;
-      margin: 100px auto;
-      background: rgba(255, 255, 255, 0.95);
+      margin: auto;
+      background-color: rgba(0, 0, 0, 0.7);
       padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      color: black;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
     h2 {
@@ -48,67 +43,55 @@
   </style>
 </head>
 <body>
-
-  <div class="container" id="loginBox" style="display: none;">
+  <div class="container">
     <h2>Sila Log Masuk</h2>
     <p>Log masuk dengan email <strong>@groundteamred.com</strong> untuk teruskan.</p>
+
+    <!-- Google Sign-In Config -->
     <div id="signInDiv"></div>
   </div>
 
-  <p id="statusText">Redirecting...</p>
-
   <script>
-    // Fungsi decode JWT
-    function parseJwt(token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-      return JSON.parse(jsonPayload);
+    // Jika dah login, terus ke main.html
+    const isLoggedIn = localStorage.getItem("userLoggedIn");
+    if (isLoggedIn === "true") {
+      window.location.href = "main.html";
     }
 
-    // Fungsi login Google
+    // Fungsi Google Sign-In bila berjaya login
     function handleCredentialResponse(response) {
       const data = parseJwt(response.credential);
       const email = data.email;
 
-      console.log("Logged in as: " + email);
-
-      if (email.endsWith('@groundteamred.com')) {
-        // ✅ Email dibenarkan
+      if (email.endsWith("@groundteamred.com")) {
         localStorage.setItem("userLoggedIn", "true");
         window.location.href = "main.html";
       } else {
-        // ❌ Email bukan dari domain GTR
         window.location.href = "unauthorized.html";
       }
     }
 
-    // Bila page ready
+    // Decode JWT untuk dapatkan email
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      ).join(''));
+      return JSON.parse(jsonPayload);
+    }
+
+    // Load Google Sign-In button
     window.onload = function () {
-      const isLoggedIn = localStorage.getItem("userLoggedIn");
+      google.accounts.id.initialize({
+        client_id: "345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
 
-      if (isLoggedIn === "true") {
-        // Jika dah login, pergi ke main.html
-        window.location.href = "main.html";
-      } else {
-        // Jika belum login, tunjuk Google Sign-In
-        document.getElementById("loginBox").style.display = "block";
-        document.getElementById("statusText").style.display = "none";
-
-        google.accounts.id.initialize({
-          client_id: "345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com",
-          callback: handleCredentialResponse
-        });
-
-        google.accounts.id.renderButton(
-          document.getElementById("signInDiv"),
-          { theme: "outline", size: "large" }
-        );
-
-        google.accounts.id.prompt(); // Auto popup
-      }
+      google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        { theme: "outline", size: "large" }
+      );
     };
   </script>
 </body>
