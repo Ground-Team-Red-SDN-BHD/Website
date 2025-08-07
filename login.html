@@ -2,14 +2,27 @@
 <html lang="ms">
   <head>
     <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com">
     <title>Login GTR</title>
     <link rel="icon" href="faviGTR.ico" type="image/x-icon">
     <base target="_top">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="login.js" defer></script>
     <style>
-      body { font-family: Arial; text-align: center; margin-top: 50px; background: #f8f9fa; }
-      .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+      body {
+        font-family: Arial;
+        text-align: center;
+        margin-top: 50px;
+        background: #f8f9fa;
+      }
+      .container {
+        max-width: 500px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
       h2 { margin-bottom: 10px; }
       p { margin-top: 0; }
       #signInDiv { margin-top: 20px; }
@@ -19,7 +32,19 @@
     <div class="container">
       <h2>Sila Log Masuk</h2>
       <p>Log masuk dengan email <strong>@groundteamred.com</strong> untuk teruskan.</p>
-      <div id="signInDiv"></div>
+
+      <!-- ✅ Konfigurasi Google Sign-In -->
+      <div id="g_id_onload"
+           data-client_id="345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com"
+           data-callback="handleCredentialResponse">
+      </div>
+
+      <!-- ✅ Butang Google Sign-In akan muncul di sini -->
+      <div class="g_id_signin"
+           data-type="standard"
+           data-theme="outline"
+           data-size="large">
+      </div>
     </div>
   </body>
 </html>
