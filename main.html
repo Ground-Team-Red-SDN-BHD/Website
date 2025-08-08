@@ -265,6 +265,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 
+    <div id="loginPopup" style="display: none; position: fixed; top: 20px; right: 20px; background-color: #28a745; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 999;">
+      ✅ Anda berjaya log masuk!
+    </div>
+
+    <script>
+    // Semak jika pengguna baru login
+    if (localStorage.getItem("justLoggedIn") === "true") {
+    const popup = document.getElementById("loginPopup");
+    popup.style.display = "block";
+
+    // Auto hide selepas 3 saat
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 3000);
+
+    // Padam flag supaya popup tak muncul lagi
+    localStorage.removeItem("justLoggedIn");
+    }
+    </script>
+
+    
 </body>
 </html>
+
 
