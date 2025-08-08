@@ -29,6 +29,52 @@
       /* (Pilihan) Untuk buat gambar statik bila skrol */
       background-attachment: fixed; 
     }
+    
+    .main-navigation {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    .dropdown {
+  position: relative;
+  display: inline-block;
+    }
+
+    .dropdown a {
+  text-decoration: none;
+  color: rgb(0, 0, 0); /* tukar ikut tema */
+  padding: 8px 12px;
+    }
+
+    .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-radius: 6px;
+    } 
+
+    .dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+    }
+
+    .dropdown-content a:hover {
+  background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+  display: block;
+    }
+
+
 </style>
 </head>
 <body>
@@ -37,14 +83,62 @@
         <div class="nav-left">
             <a href="index.html" class="header-logo"><img src="logoGTR.png" alt="GTR Logo"></a>
             <nav class="main-navigation">
-                <a href="#memo">Memo <i class="fas fa-chevron-down"></i></a>
-                <a href="#looker-studio-section">Looker Studio <i class="fas fa-chevron-down"></i></a>
-                <a href="#tableau-section">Tableau <i class="fas fa-chevron-down"></i></a>
-                <a href="#video-tutorial">Video <i class="fas fa-chevron-down"></i></a>
-                <a href="#data-insights">Live Data <i class="fas fa-chevron-down"></i></a>
-                <!-- a href="login.html" class="logout-btn">logout <i class="fas fa-chevron-down"></i></a> -->
 
-            <!-- Dalam main.html -->
+    <div class="dropdown">
+        <a href="#memo">Memo <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+            <a href="#memo-latest">Memo Terkini</a>
+            <a href="#memo-archive">Arkib Memo</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <a href="#looker-studio-section">Looker Studio <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+            <a href="#dashboard1">Dashboard Harian</a>
+            <a href="#dashboard2">Laporan Bulanan</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <a href="#tableau-section">Tableau <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+            <a href="#tableau1">Overview</a>
+            <a href="#tableau2">Performance</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <a href="#video-tutorial">Video <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+            <a href="#video-basic">Tutorial Asas</a>
+            <a href="#video-advance">Tutorial Lanjutan</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <a href="#">Live Data <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+            <a href="#test1">test1</a>
+            <a href="#test2">test2</a>
+        </div>
+    </div>
+
+        </nav>
+
+                <!-- a href="#index.html">Logout <i class="fas fa-chevron-down"></i></a> -->
+
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search...">
+
+        </div>
+
+        
+                <!-- Dalam main.html -->
             <button onclick="logout()">Logout</button>
 
             <script>
@@ -53,14 +147,7 @@
             window.location.href = "index.html";
             }
             </script>
-                
-            </nav>
-        </div>
-        <div class="nav-right">
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search...">
-            </div>
+
             <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
                 <span class="line"></span><span class="line"></span><span class="line"></span>
             </button>
@@ -265,61 +352,84 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 
-    <!-- ✅ Popup untuk memo/update -->
-<div id="memoPopup" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  max-width: 350px;
-  font-size: 15px;
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-">
-  <strong>📢 Memo Terbaru</strong><br><br>
-  <div id="memoContent">
-    ✅ Update 7 Ogos 2025<br>
-    - GTR Dashboard ada pembaikan paparan!<br>
-    - Fungsi baru login notification ditambah.<br>
-    - Sila semak laporan mingguan anda sebelum Jumaat.<br>
-  </div>
-  <br>
-  <button onclick="closeMemo()" style="
-    background: white; color: #007bff; border: none;
-    padding: 6px 12px; border-radius: 5px; cursor: pointer;
-  ">Tutup</button>
-</div>
+        <!-- ✅ Popup untuk memo/update -->
+        <div id="memoPopup" style="
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        max-width: 350px;
+        font-size: 15px;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        ">
+        <strong>📢 Memo Terbaru</strong><br><br>
+        <div id="memoContent">Loading memo...</div>
+            <br>
+        <button onclick="closeMemo()" style="
+        background: white; color: #007bff; border: none;
+        padding: 6px 12px; border-radius: 5px; cursor: pointer;
+        ">Tutup</button>
+        </div>
 
-<script>
-  window.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("memoPopup");
-    popup.style.display = "block";
-    setTimeout(() => {
-      popup.style.opacity = 1;
-    }, 100);
-  });
+        <script>
+        // ✅ Tukar nilai ni bila ada memo/update baru
+        const CURRENT_MEMO_ID = "memo-2025-08-07";
+        const MEMO_TEXT = `
+        ✅ Update 7 Ogos 2025<br>
+        - GTR Dashboard ada pembaikan paparan!<br>
+        - Fungsi baru login notification ditambah.<br>
+        - Sila semak laporan mingguan anda sebelum Jumaat.<br>
+        `;
 
-  function closeMemo() {
-    const popup = document.getElementById("memoPopup");
-    popup.style.opacity = 0;
-    setTimeout(() => {
-      popup.style.display = "none";
-    }, 500);
-    // 🚫 Jangan set apa-apa dalam localStorage – jadi dia akan sentiasa keluar
-  }
-</script>
+        // ✅ Paparkan memo jika belum dibaca
+        window.addEventListener("DOMContentLoaded", function () {
+        const hasSeen = localStorage.getItem("seenMemo");
+
+        if (hasSeen !== CURRENT_MEMO_ID) {
+        document.getElementById("memoContent").innerHTML = MEMO_TEXT;
+        const popup = document.getElementById("memoPopup");
+        popup.style.display = "block";
+        setTimeout(() => {
+        popup.style.opacity = 1;
+        }, 100);
+        }
+        });
+
+        // ✅ Tutup memo dan simpan sebagai sudah dibaca
+        function closeMemo() {
+        const popup = document.getElementById("memoPopup");
+        popup.style.opacity = 0;
+        setTimeout(() => {
+        popup.style.display = "none";
+        }, 500);
+        localStorage.setItem("seenMemo", CURRENT_MEMO_ID);
+        }
+
+        //function search bar
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+        const filter = this.value.toLowerCase();
+        const listItems = document.querySelectorAll("#contentList li");
+
+        listItems.forEach(function (item) {
+      const text = item.textContent.toLowerCase();
+      if (text.includes(filter)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+        });
+        });
+
+        </script>
 
 
 
 </body>
 </html>
-
-
-
-
-
