@@ -265,53 +265,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 
-    <!-- ✅ Popup login notification -->
-    <div id="loginPopup" style="
-      display: none;
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #28a745;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      font-size: 16px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 9999;
-    ">
-      ✅ Anda berjaya log masuk!
-    </div>
+    <!-- ✅ Popup untuk memo/update -->
+<div id="memoPopup" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  max-width: 350px;
+  font-size: 15px;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+">
+  <strong>📢 Memo Terbaru</strong><br><br>
+  <div id="memoContent">
+    ✅ Update 7 Ogos 2025<br>
+    - GTR Dashboard ada pembaikan paparan!<br>
+    - Fungsi baru login notification ditambah.<br>
+    - Sila semak laporan mingguan anda sebelum Jumaat.<br>
+  </div>
+  <br>
+  <button onclick="closeMemo()" style="
+    background: white; color: #007bff; border: none;
+    padding: 6px 12px; border-radius: 5px; cursor: pointer;
+  ">Tutup</button>
+</div>
 
-    <!-- ✅ Script untuk trigger dan animasi popup -->
-    <script>
-      window.addEventListener("DOMContentLoaded", function () {
-        if (localStorage.getItem("justLoggedIn") === "true") {
-      const popup = document.getElementById("loginPopup");
-
-      popup.style.display = "block";
-      setTimeout(() => {
-        popup.style.opacity = 1; // fade in
-      }, 100); // bagi masa sikit sebelum naik
-
-      // Auto hide selepas 3 saat
-      setTimeout(() => {
-        popup.style.opacity = 0; // fade out
-        setTimeout(() => {
-          popup.style.display = "none";
-        }, 500); // tunggu fade out habis baru hide
-      }, 3000);
-
-      // Padam flag supaya tak ulang lagi
-      localStorage.removeItem("justLoggedIn");
-    }
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("memoPopup");
+    popup.style.display = "block";
+    setTimeout(() => {
+      popup.style.opacity = 1;
+    }, 100);
   });
+
+  function closeMemo() {
+    const popup = document.getElementById("memoPopup");
+    popup.style.opacity = 0;
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 500);
+    // 🚫 Jangan set apa-apa dalam localStorage – jadi dia akan sentiasa keluar
+  }
 </script>
+
 
 
 </body>
 </html>
+
 
 
 
