@@ -29,6 +29,51 @@
       /* (Pilihan) Untuk buat gambar statik bila skrol */
       background-attachment: fixed; 
     }
+
+    .main-navigation {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    .dropdown {
+  position: relative;
+  display: inline-block;
+    }
+
+    .dropdown a {
+  text-decoration: none;
+  color: rgb(0, 0, 0); /* tukar ikut tema */
+  padding: 8px 12px;
+    }
+
+    .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-radius: 6px;
+    } 
+
+    .dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+    }
+
+    .dropdown-content a:hover {
+  background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+  display: block;
+    }
+
 </style>
 </head>
 <body>
@@ -38,21 +83,50 @@
             <div class="nav-left">
                 <a href="index.html" class="header-logo"><img src="logoGTR.png" alt="GTR Logo"></a>
                 <nav class="main-navigation">
-                    <a href="#memo-full-page">Memo</a>
-                    <a href="#manuals">Manuals</a>
-                    <a href="#ramp-forms">Ramp Forms</a>
-                    <a href="#ramp-service">About Us</a>
-                    <a href="#e-rim">E-Rim</a>
-                    <a href="#pitstop">Pitstop</a>
-                    <a href="#airport-pass">Airport Pass</a>
-                    <a href="#highlights">Highlights</a>
-                </nav>
+
+            <div class="dropdown">
+                <a href="#">Memo <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                <a href="#memo-full-page">Memo Terkini</a>
+                <a href="#memo-archive">E-Library</a>
             </div>
+        </div>
+
+            <div class="dropdown">
+                <a href="#manuals">Manuals <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                <a href="#ramp-forms">Ramp Forms</a>
+                <a href="#e-rim">E-Rim</a>
+                <a href="#pitstop">Pitstop</a>
+                <a href="#airport-pass">Airport Pass</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+                <a href="#">About Us <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                <a href="#ramp-service">Ramp Service</a>
+                <a href="#highlights">Highlights</a>
+            </div>
+        </div>
+                </nav>
+        </div>
             <div class="nav-right">
                 <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search...">
-                </div>
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search...">
+            </div>
+
+            <!-- Dalam main.html -->
+            <button onclick="logout()">Logout</button>
+
+            <script>
+            function logout() {
+            localStorage.removeItem("userLoggedIn");
+            window.location.href = "index.html";
+            }
+            </script>
+
                 <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
                     <span class="line"></span><span class="line"></span><span class="line"></span>
                 </button>
@@ -76,7 +150,7 @@
                 <i class="fas fa-archive section-icon"></i>
                 <h2>Memo Archive</h2>
                 <p class="section-subheading">All Past Memos & Announcements</p>
-                <a href="index.html" class="btn-view-all">← Back to Home</a>
+                <a href="main.html" class="btn-view-all">← Back to Home</a>
             </div>
             
             <div class="memo-container">
