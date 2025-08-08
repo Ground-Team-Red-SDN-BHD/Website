@@ -7,6 +7,7 @@ function handleCredentialResponse(response) {
   if (email.endsWith('@groundteamred.com')) {
     // ✅ Email dibenarkan
     localStorage.setItem("userLoggedIn", "true");
+    localStorage.setItem("justLoggedIn", "true"); // ✅ Flag untuk popup
     window.location.href = "main.html"; // atau index.html jika itu dashboard sebenar
   } else {
     // ❌ Email bukan dari domain GTR
@@ -36,4 +37,5 @@ window.onload = function () {
 
   google.accounts.id.prompt(); // Auto popup sign in
 };
+
 
