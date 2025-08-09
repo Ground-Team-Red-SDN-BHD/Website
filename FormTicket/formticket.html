@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Ticket</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Ticket Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            padding: 20px;
+            margin: 20px;
+            background-color: #f4f4f4;
         }
-        .form-container {
+        .container {
             max-width: 500px;
             margin: auto;
             background: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
         }
         h2 {
             text-align: center;
@@ -25,96 +23,101 @@
         }
         label {
             font-weight: bold;
-            margin-top: 10px;
-            display: block;
         }
-        input, textarea, select, button {
+        input, textarea, select {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
+            margin: 8px 0 15px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
         button {
-            background: #007bff;
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
             color: white;
-            font-size: 16px;
-            margin-top: 15px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
-            background: #0056b3;
+            background: #218838;
+        }
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
         }
         .success {
             color: green;
-            text-align: center;
-            margin-top: 10px;
         }
         .error {
             color: red;
-            text-align: center;
-            margin-top: 10px;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Submit Ticket</h2>
+        <form id="ticketForm">
+            <label for="id_gtr">ID GTR:</label>
+            <input type="text" id="id_gtr" name="id_gtr" required>
 
-<div class="form-container">
-    <h2>Submit Ticket</h2>
-    <form id="ticketForm">
-        <label for="id_gtr">ID GTR</label>
-        <input type="text" id="id_gtr" name="id_gtr" required>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+            <label for="issue">Issue:</label>
+            <textarea id="issue" name="issue" rows="4" required></textarea>
 
-        <label for="issue">Issue</label>
-        <textarea id="issue" name="issue" rows="4" required></textarea>
-
-        <label for="location">Location Problem</label>
-        <select id="location" name="location" required>
+            <label for="location">Location:</label>
+          <select id="location" name="location" required>
             <option value="">-- Select Location --</option>
             <option value="Spreadsheet">Spreadsheet</option>
             <option value="AppSheet">AppSheet</option>
             <option value="Looker Studio">Looker Studio</option>
-        </select>
+          </select>
 
-        <button type="submit">Submit Ticket</button>
-    </form>
-    <div class="success" id="successMsg" style="display:none;">✅ Ticket submitted successfully!</div>
-    <div class="error" id="errorMsg" style="display:none;">❌ Error submitting ticket.</div>
-</div>
+            <button type="submit">Hantar</button>
+        </form>
+        <div class="message" id="message"></div>
+    </div>
 
-<script>
-document.getElementById("ticketForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+    <script>
+        document.getElementById("ticketForm").addEventListener("submit", function(e) {
+            e.preventDefault();
 
-    const formData = {
-        id_gtr: document.getElementById("id_gtr").value,
-        name: document.getElementById("name").value,
-        issue: document.getElementById("issue").value,
-        location: document.getElementById("location").value
-    };
+            const formData = {
+                id_gtr: document.getElementById("id_gtr").value.trim(),
+                name: document.getElementById("name").value.trim(),
+                issue: document.getElementById("issue").value.trim(),
+                location: document.getElementById("location").value.trim()
+            };
 
-    fetch("https://script.google.com/a/macros/groundteamred.com/s/AKfycbywq3UAdeNBnf9UdyaGqYuozOvfTqBimv3za-ALXAKOgEkZ-6qNZC38sEgwfgQSsper/exec", {
-        method: "POST",
-        mode: "no-cors", // Penting kalau Web App tak set CORS
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(() => {
-        document.getElementById("successMsg").style.display = "block";
-        document.getElementById("errorMsg").style.display = "none";
-        document.getElementById("ticketForm").reset();
-    })
-    .catch(() => {
-        document.getElementById("errorMsg").style.display = "block";
-        document.getElementById("successMsg").style.display = "none";
-    });
-});
-</script>
-
+            fetch("https://script.google.com/a/macros/groundteamred.com/s/AKfycbywq3UAdeNBnf9UdyaGqYuozOvfTqBimv3za-ALXAKOgEkZ-6qNZC38sEgwfgQSsper/exec", { // Gantikan dengan URL Web App Google Apps Script
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    document.getElementById("message").textContent = "✅ Ticket berjaya dihantar!";
+                    document.getElementById("message").className = "message success";
+                    document.getElementById("ticketForm").reset();
+                } else {
+                    document.getElementById("message").textContent = "❌ Gagal hantar ticket.";
+                    document.getElementById("message").className = "message error";
+                }
+            })
+            .catch(error => {
+                document.getElementById("message").textContent = "❌ Error: " + error;
+                document.getElementById("message").className = "message error";
+            });
+        });
+    </script>
 </body>
 </html>
