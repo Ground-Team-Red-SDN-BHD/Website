@@ -1,124 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Ticket</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            padding: 20px;
-        }
-        .form-container {
-            max-width: 500px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-        input, textarea, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-        button {
-            background: #007bff;
-            color: white;
-            font-size: 16px;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        .success {
-            color: green;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .error {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
-        }
-    </style>
-</head>
+<html>
 <body>
+  <form id="ticketForm">
+    ID GTR: <input type="text" name="id_gtr" required><br>
+    Name: <input type="text" name="name" required><br>
+    Issue: <input type="text" name="issue" required><br>
+    Location: <input type="text" name="location" required><br>
+    <button type="submit">Submit</button>
+  </form>
 
-<div class="form-container">
-    <h2>Submit Ticket</h2>
-    <form id="ticketForm">
-        <label for="id_gtr">ID GTR</label>
-        <input type="text" id="id_gtr" name="id_gtr" required>
+  <script>
+    document.getElementById("ticketForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = {
+        id_gtr: this.id_gtr.value,
+        name: this.name.value,
+        issue: this.issue.value,
+        location: this.location.value
+      };
 
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+      try {
+        const res = await fetch("PASTE_YOUR_WEB_APP_URL_HERE", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
 
-        <label for="issue">Issue</label>
-        <textarea id="issue" name="issue" rows="4" required></textarea>
+        if (!res.ok) throw new Error("HTTP error " + res.status);
 
-        <label for="location">Location Problem</label>
-        <select id="location" name="location" required>
-            <option value="">-- Select Location --</option>
-            <option value="Spreadsheet">Spreadsheet</option>
-            <option value="AppSheet">AppSheet</option>
-            <option value="Looker Studio">Looker Studio</option>
-        </select>
-
-        <button type="submit">Submit Ticket</button>
-    </form>
-    <p id="responseMessage"></p>
-</div>
-
-<script>
-    document.getElementById("ticketForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-
-        const formData = {
-            id_gtr: document.getElementById("id_gtr").value,
-            name: document.getElementById("name").value,
-            issue: document.getElementById("issue").value,
-            location: document.getElementById("location").value
-        };
-
-        // Gantikan URL di bawah dengan URL Web App Google Apps Script kamu
-        const scriptURL = "https://script.google.com/a/macros/groundteamred.com/s/AKfycbywq3UAdeNBnf9UdyaGqYuozOvfTqBimv3za-ALXAKOgEkZ-6qNZC38sEgwfgQSsper/exec";
-
-        try {
-            const response = await fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            const result = await response.json();
-            if (result.status === "success") {
-                document.getElementById("responseMessage").textContent = "✅ Ticket submitted successfully!";
-                document.getElementById("responseMessage").className = "success";
-                document.getElementById("ticketForm").reset();
-            } else {
-                throw new Error("Failed to submit ticket");
-            }
-        } catch (error) {
-            document.getElementById("responseMessage").textContent = "❌ Error submitting ticket.";
-            document.getElementById("responseMessage").className = "error";
+        const data = await res.json();
+        if (data.status === "success") {
+          alert("Ticket submitted successfully!");
+          this.reset();
+        } else {
+          alert("Error: " + JSON.stringify(data));
         }
+      } catch (err) {
+        console.error(err);
+        alert("❌ Error submitting ticket.");
+      }
     });
-</script>
-
+  </script>
 </body>
 </html>
