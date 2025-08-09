@@ -1,125 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Request Ticket Sheet Problem</title>
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-    crossorigin="anonymous" 
-  />
-  <style>
-    form {
-      font-size: 20px !important;
-      width: min(800px, 90%);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Ticket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .success {
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-  <form
-    id="form"
-    class="mx-auto my-5 shadow p-4"
-    method="POST"
-    
-  >
-    <!-- action will be set by JS -->
-    <div class="mb-3 d-flex">
-      <label class="mx-3" for="ID_GTR">ID GTR:</label>
-      <input
-        type="text"
-        class="mx-3 form-control"
-        id="ID_GTR"
-        name="ID GTR"
-        list="list_ID_GTR"
-      />
-      <datalist id="list_ID_GTR"></datalist>
-    </div>
 
-    <div class="mb-3 d-flex">
-      <label class="mx-3" for="EMAIL">EMAIL:</label>
-      <input
-        type="text"
-        class="mx-3 form-control"
-        id="EMAIL"
-        name="EMAIL"
-        list="EMAILS"
-      />
-      <datalist id="EMAILS"></datalist>
-    </div>
+<div class="form-container">
+    <h2>Submit Ticket</h2>
+    <form id="ticketForm">
+        <label for="id_gtr">ID GTR</label>
+        <input type="text" id="id_gtr" name="id_gtr" required>
 
-    <div class="mb-3 d-flex">
-      <label class="mx-3" for="NAME">NAME:</label>
-      <input
-        type="text"
-        class="mx-3 form-control"
-        id="NAME"
-        name="NAME"
-        list="NAMES"
-      />
-      <datalist id="NAMES"></datalist>
-    </div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
 
-    <div class="mb-3 d-flex">
-      <label class="mx-3" for="PROBLEM">PROBLEM:</label>
-      <input
-        type="text"
-        class="mx-3 form-control"
-        id="PROBLEM"
-        name="PROBLEM"
-        list="PROBLEMS"
-      />
-      <datalist id="PROBLEMS"></datalist>
-    </div>
+        <label for="issue">Issue</label>
+        <textarea id="issue" name="issue" rows="4" required></textarea>
 
-    <div class="mb-3 d-flex">
-      <label class="mx-3" for="SHEET_NAME">SHEET NAME:</label>
-      <input
-        type="text"
-        class="mx-3 form-control"
-        id="SHEET_NAME"
-        name="SHEET NAME"
-        list="list_SHEET_NAME"
-      />
-      <datalist id="list_SHEET_NAME"></datalist>
-    </div>
+        <label for="location">Location Problem</label>
+        <select id="location" name="location" required>
+            <option value="">-- Select Location --</option>
+            <option value="Spreadsheet">Spreadsheet</option>
+            <option value="AppSheet">AppSheet</option>
+            <option value="Looker Studio">Looker Studio</option>
+        </select>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+        <button type="submit">Submit Ticket</button>
+    </form>
+    <p id="responseMessage"></p>
+</div>
 
-  <script>
-    const url = "https://script.google.com/a/macros/groundteamred.com/s/AKfycbywq3UAdeNBnf9UdyaGqYuozOvfTqBimv3za-ALXAKOgEkZ-6qNZC38sEgwfgQSsper/exec";
-    document.getElementById('form').action = url;
+<script>
+    document.getElementById("ticketForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-    // Datalists
-    const fields = [
-      { id: "list_ID_GTR", header: "ID GTR" },
-      { id: "EMAILS", header: "EMAIL" },
-      { id: "NAMES", header: "NAME" },
-      { id: "PROBLEMS", header: "PROBLEM" },
-      { id: "list_SHEET_NAME", header: "SHEET NAME" },
-    ];
+        const formData = {
+            id_gtr: document.getElementById("id_gtr").value,
+            name: document.getElementById("name").value,
+            issue: document.getElementById("issue").value,
+            location: document.getElementById("location").value
+        };
 
-    fields.forEach(({ id, header }) => {
-      fetch(`${url}?header=${encodeURIComponent(header)}`)
-        .then((response) => response.json())
-        .then(({ data }) => {
-          populateDatalists(id, data);
-        })
-        .catch((error) => console.error(`Error fetching ${header}:`, error));
+        // Gantikan URL di bawah dengan URL Web App Google Apps Script kamu
+        const scriptURL = "https://script.google.com/a/macros/groundteamred.com/s/AKfycbywq3UAdeNBnf9UdyaGqYuozOvfTqBimv3za-ALXAKOgEkZ-6qNZC38sEgwfgQSsper/exec";
+
+        try {
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const result = await response.json();
+            if (result.status === "success") {
+                document.getElementById("responseMessage").textContent = "✅ Ticket submitted successfully!";
+                document.getElementById("responseMessage").className = "success";
+                document.getElementById("ticketForm").reset();
+            } else {
+                throw new Error("Failed to submit ticket");
+            }
+        } catch (error) {
+            document.getElementById("responseMessage").textContent = "❌ Error submitting ticket.";
+            document.getElementById("responseMessage").className = "error";
+        }
     });
+</script>
 
-    function populateDatalists(id, arr) {
-      const options = arr.map(item => `<option value="${item}">`).join('');
-      document.getElementById(id).innerHTML = options;
-    }
-
-    // Optional: show popup on successful form submit
-    document.getElementById('form').addEventListener('submit', function () {
-      alert("Form submitted successfully!");
-    });
-  </script>
 </body>
 </html>
