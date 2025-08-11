@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviation Operations Dashboard - July 2025</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1>Aviation Operations Dashboard - July 2025</h1>
+            <p class="date-range">06 Jul 2025 - 27 Jul 2025</p>
+        </header>
+
+        <!-- Summary Statistics -->
+        <div class="summary-section">
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-number" id="totalOperations">0</div>
+                    <div class="summary-label">Total Operations</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-number" id="avgWeekly">0</div>
+                    <div class="summary-label">Weekly Average</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-number">5</div>
+                    <div class="summary-label">Operational Areas</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-number">11</div>
+                    <div class="summary-label">Active Categories</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Panels Grid -->
+        <div class="charts-grid">
+            <!-- Administrative/Back Office Panel -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h2>Administrative / Back Office</h2>
+                    <p class="panel-description">Administrative support and accounting operations</p>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="adminChart"></canvas>
+                </div>
+                <div class="panel-stats" id="adminStats"></div>
+            </div>
+
+            <!-- Aircraft Handling Panel -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h2>Aircraft Handling</h2>
+                    <p class="panel-description">Aircraft and baggage handling operations</p>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="aircraftChart"></canvas>
+                </div>
+                <div class="panel-stats" id="aircraftStats"></div>
+            </div>
+
+            <!-- Technical Operations Panel -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h2>Technical Operations</h2>
+                    <p class="panel-description">Technical maintenance and inspection services</p>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="technicalChart"></canvas>
+                </div>
+                <div class="panel-stats" id="technicalStats"></div>
+            </div>
+
+            <!-- Ground Operations Panel -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h2>Ground Operations</h2>
+                    <p class="panel-description">Cargo and towing operations</p>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="groundChart"></canvas>
+                </div>
+                <div class="panel-stats" id="groundStats"></div>
+            </div>
+
+            <!-- Flight Operations Center Panel -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h2>Flight Operations Center</h2>
+                    <p class="panel-description">Flight operations coordination and management</p>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="flightOpsChart"></canvas>
+                </div>
+                <div class="panel-stats" id="flightOpsStats"></div>
+            </div>
+        </div>
+
+        <!-- Legend and Controls -->
+        <div class="dashboard-footer">
+            <div class="legend-container">
+                <h3>Data Insights</h3>
+                <div class="insights-grid">
+                    <div class="insight-item">
+                        <div class="insight-icon">✈️</div>
+                        <div class="insight-text">
+                            <span class="insight-label">Peak Operations:</span>
+                            <span class="insight-value">Aircraft Handling leads with highest volumes</span>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">📈</div>
+                        <div class="insight-text">
+                            <span class="insight-label">Growth Trend:</span>
+                            <span class="insight-value">Steady increase across all operational areas</span>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">🔧</div>
+                        <div class="insight-text">
+                            <span class="insight-label">Technical Focus:</span>
+                            <span class="insight-value">Ramp technicians showing consistent activity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
