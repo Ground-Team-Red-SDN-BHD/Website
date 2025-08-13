@@ -21,24 +21,27 @@
       background: url('pictures/backgroundAA.png') no-repeat center center/cover;
     }
     .login-card {
+      font-size: 18px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 16px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 10);
       padding: 30px;
-      width: 350px;
+      width: 450px;
       text-align: center;
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 37);
     }
     .logo {
-      max-width: 140px;
+      max-width: 160px;
       margin-bottom: 1px;
     }
     .roles {
+      text-align: center;
+      align-items: center;
       display: flex;
-      justify-content: space-around;
-      margin: 20px 0;
+      justify-content: space-around; /* Center the roles kalau ade dua baru space round */
+      margin: 20px 10px;
       color: white;
     }
     .roles label {
@@ -98,7 +101,7 @@
       alert('Simulasi Google Sign-In untuk role: ' + role);
       // Di sini awak akan letak Google Sign-In API code
       // Contoh redirect:
-      if (role === 'allstars') {
+      if (role === 'GTR') {
         window.location.href = 'main.html';
       } else {
         window.location.href = 'unauthorized.html';
