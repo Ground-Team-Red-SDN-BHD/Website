@@ -20,30 +20,42 @@
     }
 
     .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(56, 56, 56, 0.315);
+      border-radius: 1px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0);
+      padding: 20px;
+      width: 350;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      
+    }
+
+    .logo {
+      max-width: 120px;
+      margin-bottom: 1px;
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.95);
-      color: #000;
+      background: rgba(255, 255, 255, 0.199);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
       padding: 30px;
-      border-radius: 10px;
-      max-width: 450px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
 
     .container h2 {
-      margin-bottom: 15px;
-      color: #d9534f;
+      margin-bottom: 1px;
+      font-size: 28px;
+      color: #db1b14;
     }
 
     .container button {
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 10px 20px;
       background-color: #d9534f;
       color: white;
@@ -58,8 +70,11 @@
   </style>
 </head>
 <body>
+  
   <div class="overlay">
     <div class="container">
+      <div class="login-card">
+      <img src="logoGTR.png" alt="Logo" class="logo" /></div>
       <h2>Akses Ditolak</h2>
       <p>Hanya pengguna dengan email <strong>@groundteamred.com</strong> dibenarkan akses.</p>
       <button onclick="window.location.href='index.html'">Kembali ke Halaman Utama</button>
