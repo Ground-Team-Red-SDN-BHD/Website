@@ -13,6 +13,17 @@
       margin: 0;
     }
 
+    .header {
+        position: relative;
+        z-index: 1000;
+        background-color: white; /* atau warna solid yang sesuai */
+    }
+
+    .banner {
+        position: relative;
+        z-index: 1;
+        }
+
     body {
       /* Letakkan nama fail gambar anda di sini */
       background-image: url('pictures/backgroundAA.png');
@@ -88,8 +99,22 @@
         <a href="#">Memo <i class="fas fa-chevron-down"></i></a>
         <div class="dropdown-content">
             <a href="#memo">Memo Terkini</a>
-            <a href="memo.html">Full Memo</a>
+            <a href="FormTicket/elibrary.html">E-Library</a>
             <a href="FormTicket/formticket.html">Ticket Repairing</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <a href="#ramp.html">Ramp <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+            <a href="KLIA2Ops">KLIA 2 Ops </a>
+            <a href="FOCA OPS">FOCA OPS </a>
+            <a href="GSE">GSE </a>
+            <a href="BH">Baggage Handling(BH) </a>
+            <a href="LC">Load Control(LC) </a>
+            <a href="Training">Training </a>
+            <a href="AIC">AIC </a>
+            <a href="RampStore">Ramp Store </a>
         </div>
     </div>
 
@@ -105,7 +130,7 @@
         <a href="#">Tableau <i class="fas fa-chevron-down"></i></a>
         <div class="dropdown-content">
             <a href="#tableau-section">Overview</a>
-            <a href="">TEST</a>
+            <a href="#">TEST</a>
         </div>
     </div>
 
@@ -121,8 +146,8 @@
     <div class="dropdown">
         <a href="#partner-section">Flight Partners <i class="fas fa-chevron-down"></i></a>
         <div class="dropdown-content">
-            <a href="#test1">Test1</a>
-            <a href="#test2">Test2</a>
+            <a href="#test1">test1</a>
+            <a href="#test2">test2</a>
         </div>
     </div>
 
@@ -155,11 +180,12 @@
             </button>
         </div>
     </div>
-    <nav id="mobile-menu" class="mobile-nav">
+    <!-- Mobile menu -->
+    <nav class="mobile-nav" id="mobile-menu">
         <a href="#memo">Memo</a>
         <a href="#looker-studio-section">Looker Studio</a>
         <a href="#tableau-section">Tableau</a>
-        <a href="#video-tutorial">Video </a>
+        <a href="#video-tutorial">Video</a>
         <a href="#data-insights">Live Data</a>
     </nav>
 </header>
@@ -381,13 +407,19 @@
         </div>
 
         <script>
+
+        // Toggle Mobile Menu
+        document.getElementById('hamburger-btn').addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.toggle('active');
+        });
+
         // ✅ Tukar nilai ni bila ada memo/update baru
-        const CURRENT_MEMO_ID = "memo-2025-08-10";
+        const CURRENT_MEMO_ID = "memo-2025-08-07";
         const MEMO_TEXT = `
-        ✅ Update 10 Ogos 2025<br>
-        - (NEW) LatarBelakang berwajah baru!<br>
-        - (NEW) E-Library & FAQ bakal muncul!<br>
-        - (NEW) Ticket Repairing!.<br>
+        ✅ Update 7 Ogos 2025<br>
+        - GTR Dashboard ada pembaikan paparan!<br>
+        - Fungsi baru login notification ditambah.<br>
+        - Sila semak laporan mingguan anda sebelum Jumaat.<br>
         `;
 
         // ✅ Paparkan memo jika belum dibaca
@@ -435,10 +467,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
