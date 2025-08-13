@@ -12,52 +12,99 @@
 
   <style>
     body {
-      background-image: url('pictures/backgroundAA.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('pictures/backgroundAA.png') no-repeat center center/cover;
     }
-
-    .container {
-      max-width: 500px;
-      margin: 120px auto;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      color: black;
+    .login-card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 10);
+      padding: 30px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 37);
     }
-
-    h2 {
-      margin-bottom: 10px;
+    .logo {
+      max-width: 140px;
+      margin-bottom: 1px;
     }
-
-    p {
-      margin-top: 0;
+    .roles {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      color: white;
     }
-
-    #signInDiv {
-      margin-top: 20px;
+    .roles label {
+      cursor: pointer;
+    }
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      color: #555;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+    .google-btn:hover {
+      background: #f0f0f0;
+    }
+    .google-btn img {
+      height: 20px;
+      margin-right: 8px;
     }
   </style>
 </head>
 <body>
 
+  <div class ="login-card">
+    <img src="logoGTR.png" alt="Ground Team Red Logo" class="logo">
+    <!-- h3>Log In</h3 -->
+    <p>Sila log masuk dengan email <strong>@groundteamred.com</strong> untuk teruskan.</p>
+
+    <div class="roles">
+      <label>
+        <input type="radio" name="role" value="member" checked> GTR
+      </label>
+      <label>
+        <input type="radio" name="role" value="admin"> Admin
+      </label>
+    </div>
+
   <div class="container" id="loginBox" style="display: none;">
-    <h2>Sila Log Masuk</h2>
-    <p>Log masuk dengan email <strong>@groundteamred.com</strong> untuk teruskan.</p>
     <div id="signInDiv"></div>
   </div>
 
   <p id="statusText">Redirecting...</p>
 
   <script>
+
+    // Simulate Google Sign-In for demo roles
+    function handleSignIn() {
+      const role = document.querySelector('input[name="role"]:checked').value;
+      alert('Simulasi Google Sign-In untuk role: ' + role);
+      // Di sini awak akan letak Google Sign-In API code
+      // Contoh redirect:
+      if (role === 'allstars') {
+        window.location.href = 'main.html';
+      } else {
+        window.location.href = 'unauthorized.html';
+      }
+    }
+
     // Fungsi decode JWT
     function parseJwt(token) {
       const base64Url = token.split('.')[1];
@@ -113,5 +160,3 @@
   </script>
 </body>
 </html>
-
-
