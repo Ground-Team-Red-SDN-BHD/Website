@@ -121,12 +121,12 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
     padding: 8px 15px 8px 40px;
     background-color: var(--background-light, #f8f9fa);
     font-size: 14px;
-    width: 200px;
+    width: 100px;
 }
 
 .search-bar i {
     position: absolute;
-    left: 15px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--secondary-text-color, #7f8c8d);
@@ -238,6 +238,21 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
 .event-details h4 { margin: 0 0 4px 0; color: var(--text-primary); font-size: 1em; }
 .event-details p { margin: 0; font-size: 0.9em; }
 
+/* Mobile Hamburger */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+.hamburger-btn .line {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+}
+
 /* Mobile Navigation Panel */
 .mobile-nav {
     display: none;
@@ -254,7 +269,7 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
 }
 .mobile-nav.active {
     display: flex;
-    max-height: 500px; /* Ketinggian maksimum untuk menu */
+    max-height: 500px;
 }
 .mobile-nav a {
     padding: 15px 24px;
@@ -270,10 +285,9 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
         display: none;
     }
     .hamburger-btn {
-        display: block;
+        display: flex;
     }
 }
-
 @media (max-width: 768px) {
     .search-bar {
         display: none;
@@ -857,3 +871,4 @@ h2#dynamic-date { color: var(--accent-color); font-weight: 600; }
 }
 
 @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
