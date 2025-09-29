@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit Ticket</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        width: 350px;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+        color: #555;
+    }
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+    button {
+        width: 100%;
+        margin-top: 20px;
+        background: #4CAF50;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #45a049;
+    }
+    .alert {
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        margin-top: 15px;
+        display: none;
+    }
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Submit Ticket</h2>
+    <form id="ticketForm">
+        <label>ID GTR</label>
+        <input type="text" name="id_gtr" required>
+
+        <label>Nama</label>
+        <input type="text" name="name" required>
+
+        <label>Issue</label>
+        <textarea name="issue" rows="3" required></textarea>
+
+        <label>location</label>
+        <input type="text" name="location" required>
+
+        <button type="submit">Send</button>
+        <div id="alertBox" class="alert"></div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("ticketForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const formData = {
+            id_gtr: this.id_gtr.value,
+            name: this.name.value,
+            issue: this.issue.value,
+            location: this.location.value
+        };
+
+        const alertBox = document.getElementById("alertBox");
+
+        try {
+            const response = await fetch("PASTE_WEB_APP_URL_DI_SINI", {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const result = await response.json();
+            if (result.status === "success") {
+                alertBox.textContent = "✅ Ticket submitted successfully!";
+                alertBox.className = "alert success";
+                alertBox.style.display = "block";
+                setTimeout(() => {
+                    window.location.href = "main.html";
+                }, 1500);
+            } else {
+                throw new Error("Server returned an error");
+            }
+        } catch (error) {
+            alertBox.textContent = "❌ Error submitting ticket.";
+            alertBox.className = "alert error";
+            alertBox.style.display = "block";
+        }
+    });
+</script>
+
+</body>
+</html>

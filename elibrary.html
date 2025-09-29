@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ground Team Red • Official site</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="faviGTR.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+    body, html {
+      height: 0%;
+      margin: 0;
+    }
+
+    body {
+      /* Letakkan nama fail gambar anda di sini */
+      background-image: url('pictures/backgroundAA.png');
+
+      /* Untuk pastikan gambar penuh satu skrin */
+      background-size: cover;
+
+      /* Untuk letakkan gambar di tengah */
+      background-position: center;
+
+      /* Untuk elak gambar berulang-ulang */
+      background-repeat: no-repeat;
+
+      /* (Pilihan) Untuk buat gambar statik bila skrol */
+      background-attachment: fixed; 
+    }
+    
+    .main-navigation {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    .dropdown {
+  position: relative;
+  display: inline-block;
+    }
+
+    .dropdown a {
+  text-decoration: none;
+  color: rgb(0, 0, 0); /* tukar ikut tema */
+  padding: 8px 12px;
+    }
+
+    .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-radius: 6px;
+    } 
+
+    .dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+    }
+
+    .dropdown-content a:hover {
+  background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+  display: block;
+    }
+
+
+</style>
+</head>
