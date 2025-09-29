@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta name="google-site-verification" content="GRjWS3m0w_bG4t6B6RrXTYqS5ZvtKVpcedOXyWjVMvc" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com">
+  <link rel="icon" href="faviGTR.ico" type="image/x-icon">
+  <title>Ground Team Red • Login</title>
+
+  <!-- Google Sign-In Library -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('pictures/backgroundAA.png') no-repeat center center/cover;
+    }
+    .login-card {
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 10);
+      padding: 15px;
+      width: 420px;
+      text-align: center;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 37);
+    }
+    .logo {
+      max-width: 160px;
+      margin-bottom: 1px;
+    }
+    .roles {
+      text-align: center;
+      align-items: center;
+      display: flex;
+      justify-content: center; /* Center the roles kalau ade dua baru space round */
+      margin: 20px 10px;
+      color: white;
+    }
+    .roles label {
+      cursor: pointer;
+    }
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: white;
+      color: #555;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+    .google-btn:hover {
+      background: #f0f0f0;
+    }
+    .google-btn img {
+      height: 20px;
+      margin-right: 8px;
+    }
+    h6 {
+      margin-bottom: 1px;
+      color: rgb(0, 0, 0);
+      font-size: 10px;
+      line-height: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class ="login-card">
+    <img src="logoGTR.png" alt="Ground Team Red Logo" class="logo">
+    <!-- h3>Log In</h3 -->
+    <p>Sila log masuk dengan email <strong>@groundteamred.com</strong> untuk teruskan.</p>
+
+    <div class="roles">
+      <label>
+        <input type="radio" name="role" value="member" checked> GTR
+      </label>
+      <label>
+        <!--input type="radio" name="role" value="admin"> Admin
+      </label-->
+    </div>
+
+  <div class="container" id="loginBox" style="display: none;">
+    <div id="signInDiv"></div>
+  </div>
+
+  <p id="statusText">Redirecting...</p>
+
+  <h6>©RampDataTeam</h6>
+
+  <script>
+
+    // Simulate Google Sign-In for demo roles
+    function handleSignIn() {
+      const role = document.querySelector('input[name="role"]:checked').value;
+      alert('Simulasi Google Sign-In untuk role: ' + role);
+      // Di sini awak akan letak Google Sign-In API code
+      // Contoh redirect:
+      if (role === 'GTR') {
+        window.location.href = 'main.html';
+      } else {
+        window.location.href = 'unauthorized.html';
+      }
+    }
+
+    // Fungsi decode JWT
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    }
+
+    // Fungsi login Google
+    function handleCredentialResponse(response) {
+      const data = parseJwt(response.credential);
+      const email = data.email;
+
+      console.log("Logged in as: " + email);
+
+      if (email.endsWith('@groundteamred.com')) {
+        // ✅ Email dibenarkan
+        localStorage.setItem("userLoggedIn", "true");
+        window.location.href = "main.html";
+      } else {
+        // ❌ Email bukan dari domain GTR
+        window.location.href = "unauthorized.html";
+      }
+    }
+
+    // Bila page ready
+    window.onload = function () {
+      const isLoggedIn = localStorage.getItem("userLoggedIn");
+
+      if (isLoggedIn === "true") {
+        // Jika dah login, pergi ke main.html
+        window.location.href = "main.html";
+      } else {
+        // Jika belum login, tunjuk Google Sign-In
+        document.getElementById("loginBox").style.display = "block";
+        document.getElementById("statusText").style.display = "none";
+
+        google.accounts.id.initialize({
+          client_id: "345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com",
+          callback: handleCredentialResponse
+        });
+
+        google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          { theme: "outline", size: "large" }
+        );
+
+        google.accounts.id.prompt(); // Auto popup
+      }
+    };
+  </script>
+</body>
+</html>
