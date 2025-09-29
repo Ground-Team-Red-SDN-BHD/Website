@@ -103,73 +103,62 @@
 
   <h6>©RampDataTeam</h6>
 
-  <script>
+ <script>
+    // Fungsi decode JWT
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    }
 
-    // Simulate Google Sign-In for demo roles
-    function handleSignIn() {
-      const role = document.querySelector('input[name="role"]:checked').value;
-      alert('Simulasi Google Sign-In untuk role: ' + role);
-      // Di sini awak akan letak Google Sign-In API code
-      // Contoh redirect:
-      if (role === 'GTR') {
-        window.location.href = 'main.html';
-      } else {
-        window.location.href = 'unauthorized.html';
-      }
-    }
+    // Fungsi login Google
+    function handleCredentialResponse(response) {
+      // AMARAN: Logik ini tidak selamat dan hanya untuk sementara
+      // sehingga anda mempunyai backend.
+      const data = parseJwt(response.credential);
+      const email = data.email;
 
-    // Fungsi decode JWT
-    function parseJwt(token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-      return JSON.parse(jsonPayload);
-    }
+      console.log("Logged in as: " + email);
 
-    // Fungsi login Google
-    function handleCredentialResponse(response) {
-      const data = parseJwt(response.credential);
-      const email = data.email;
+      if (email.endsWith('@groundteamred.com')) {
+        // ✅ Email dibenarkan (sementara)
+        localStorage.setItem("userLoggedIn", "true");
+        window.location.href = "main.html";
+      } else {
+        // ❌ Email bukan dari domain GTR
+        window.location.href = "unauthorized.html";
+      }
+    }
 
-      console.log("Logged in as: " + email);
+    // Bila page ready
+    window.onload = function () {
+      const isLoggedIn = localStorage.getItem("userLoggedIn");
 
-      if (email.endsWith('@groundteamred.com')) {
-        // ✅ Email dibenarkan
-        localStorage.setItem("userLoggedIn", "true");
-        window.location.href = "main.html";
-      } else {
-        // ❌ Email bukan dari domain GTR
-        window.location.href = "unauthorized.html";
-      }
-    }
+      if (isLoggedIn === "true") {
+        // Jika dah login, pergi ke main.html
+        window.location.href = "main.html";
+      } else {
+        // Jika belum login, tunjuk Google Sign-In
+        document.getElementById("loginBox").style.display = "block";
+        document.getElementById("statusText").style.display = "none";
 
-    // Bila page ready
-    window.onload = function () {
-      const isLoggedIn = localStorage.getItem("userLoggedIn");
+        google.accounts.id.initialize({
+          client_id: "345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com",
+          callback: handleCredentialResponse
+        });
 
-      if (isLoggedIn === "true") {
-        // Jika dah login, pergi ke main.html
-        window.location.href = "main.html";
-      } else {
-        // Jika belum login, tunjuk Google Sign-In
-        document.getElementById("loginBox").style.display = "block";
-        document.getElementById("statusText").style.display = "none";
+        google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          { theme: "outline", size: "large" }
+        );
 
-        google.accounts.id.initialize({
-          client_id: "345144651630-7e0uhvp4pamjp6d62dd2eu1j8k84j15u.apps.googleusercontent.com",
-          callback: handleCredentialResponse
-        });
-
-        google.accounts.id.renderButton(
-          document.getElementById("signInDiv"),
-          { theme: "outline", size: "large" }
-        );
-
-        google.accounts.id.prompt(); // Auto popup
-      }
-    };
-  </script>
+        google.accounts.id.prompt(); // Auto popup
+      }
+    };
+  </script>
 </body>
 </html>
+
