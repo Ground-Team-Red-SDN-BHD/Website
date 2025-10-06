@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="post-body">
                         <h3>${entry.title}</h3>
                         <p>${entry.description}</p>
-                        <a href="${entry.fileLink}" class="btn-download-doc" target="_blank">Download PDF</a>
+                        <a href="${entry.fileLink}" class="btn-download-doc" target="_blank">View/Download</a>
                     </div>
                 `;
                 container.appendChild(post);
@@ -63,4 +63,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentYearEl) {
         currentYearEl.textContent = new Date().getFullYear().toString();
     }
+
 });
