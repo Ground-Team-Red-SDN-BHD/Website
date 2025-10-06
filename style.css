@@ -355,6 +355,28 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
     }
 }
 
+/* [TAMBAH INI] Kod untuk betulkan paparan Airport Pass pada mobile */
+
+@media (max-width: 768px) {
+    /*
+     * 1. Tukar layout seksyen QR Code kepada 1 kolum.
+     * Ini akan menyusun gambar QR di atas dan senarai arahan di bawah.
+     */
+    .info-body {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    /*
+     * 2. Benarkan perkataan panjang seperti e-mel untuk pecah baris
+     * supaya tidak terkeluar dari bingkai.
+     */
+    .instructions ul li {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
 /* LAYOUT & SECTIONS */
 .dashboard-main { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
 .dashboard-section { background-color: var(--card-background); padding: 40px; margin-bottom: 40px; border-radius: 16px; box-shadow: var(--shadow-soft); }
@@ -929,6 +951,7 @@ h2#dynamic-date { color: var(--accent-color); font-weight: 600; }
 }
 
 @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
 
 
 
