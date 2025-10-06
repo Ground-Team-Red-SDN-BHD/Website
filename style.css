@@ -253,6 +253,20 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
     background-color: black;
 }
 
+@media (max-width: 768px) {
+    /* ... (kod mobile anda yang lain) ... */
+
+    /* [TAMBAH INI] Kurangkan padding untuk mobile */
+    .dashboard-main {
+        padding: 0 15px; /* Kurangkan jarak tepi utama */
+        margin: 24px auto;
+    }
+
+    .dashboard-section {
+        padding: 25px; /* Kurangkan jarak dalaman kotak */
+    }
+}
+
 /* === [PENTING] REKA BENTUK RESPONSIVE (MOBILE VIEW) === */
 @media (max-width: 992px) {
     /* Sembunyikan navigasi desktop */
@@ -951,6 +965,7 @@ h2#dynamic-date { color: var(--accent-color); font-weight: 600; }
 }
 
 @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
 
 
 
