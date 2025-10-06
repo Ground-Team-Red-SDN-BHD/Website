@@ -279,22 +279,69 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
     font-weight: 600;
 }
 
-/* Responsive Breakpoint */
+/* === [PENTING] REKA BENTUK RESPONSIVE (MOBILE VIEW) === */
 @media (max-width: 992px) {
+    /* Sembunyikan navigasi desktop */
     .main-navigation {
         display: none;
     }
+    /* Paparkan butang hamburger */
     .hamburger-btn {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    .hamburger-btn .line {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: var(--text-primary);
+        margin: 5px 0;
+        transition: all 0.3s ease-in-out;
+    }
+    .hamburger-btn.active .line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger-btn.active .line:nth-child(2) { opacity: 0; }
+    .hamburger-btn.active .line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Gaya panel menu mobile */
+    .mobile-nav {
         display: flex;
+        flex-direction: column;
+        background: white;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 280px;
+        height: 100%;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+    }
+    .mobile-nav.active {
+        transform: translateX(0);
+    }
+    .mobile-nav a {
+        padding: 15px 24px;
+        text-decoration: none;
+        color: var(--text-primary);
+        border-top: 1px solid var(--border-color);
+        font-weight: 600;
+    }
+
+    /* Tukar susun atur utama kepada 1 kolum */
+    .main-content-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-column {
+        order: -1; /* Pindahkan sidebar ke atas pada mobile */
     }
 }
+
 @media (max-width: 768px) {
-    .search-bar {
-        display: none;
-    }
-    .new-header {
-        padding: 0 16px;
-    }
+    .search-bar { display: none; }
+    .new-header, .main-content-wrapper { padding: 0 16px; }
 }
 
 /* LAYOUT & SECTIONS */
@@ -871,4 +918,5 @@ h2#dynamic-date { color: var(--accent-color); font-weight: 600; }
 }
 
 @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
 
