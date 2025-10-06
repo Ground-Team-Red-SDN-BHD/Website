@@ -253,32 +253,6 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
     background-color: black;
 }
 
-/* Mobile Navigation Panel */
-.mobile-nav {
-    display: none;
-    flex-direction: column;
-    background-color: white;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
-.mobile-nav.active {
-    display: flex;
-    max-height: 500px;
-}
-.mobile-nav a {
-    padding: 15px 24px;
-    text-decoration: none;
-    color: var(--primary-text-color);
-    border-top: 1px solid #f0f0f0;
-    font-weight: 600;
-}
-
 /* === [PENTING] REKA BENTUK RESPONSIVE (MOBILE VIEW) === */
 @media (max-width: 992px) {
     /* Sembunyikan navigasi desktop */
@@ -342,6 +316,43 @@ h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; color: var(--primary-text-c
 @media (max-width: 768px) {
     .search-bar { display: none; }
     .new-header, .main-content-wrapper { padding: 0 16px; }
+}
+
+/* [TAMBAH INI] Kod untuk betulkan Ramp Forms pada mobile */
+
+@media (max-width: 768px) {
+    /*
+     * 1. Tukar layout utama 'Ramp Forms' kepada 1 kolum.
+     * Senarai teks akan berada di atas, dan grid ikon di bawah.
+     */
+    .forms-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    /*
+     * 2. Jadikan grid ikon boleh diskrol secara horizontal.
+     */
+    .forms-grid {
+        display: flex; /* Tukar dari grid ke flex untuk mencipta satu baris panjang */
+        overflow-x: auto; /* Ini yang membolehkan ia diskrol ke kiri/kanan */
+        padding-bottom: 20px; /* Ruang di bawah untuk bayang-bayang */
+        
+        /* Hilangkan scrollbar untuk penampilan yang kemas */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    
+    .forms-grid::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    /*
+     * 3. Beri saiz tetap pada setiap item ikon supaya ia tidak 'penyek'.
+     */
+    .forms-grid .form-item {
+        flex: 0 0 120px; /* Setiap item akan mempunyai lebar 120px */
+    }
 }
 
 /* LAYOUT & SECTIONS */
@@ -918,5 +929,6 @@ h2#dynamic-date { color: var(--accent-color); font-weight: 600; }
 }
 
 @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
 
 
