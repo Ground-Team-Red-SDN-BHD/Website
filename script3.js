@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const timeAgo = getTimeAgo(date);
 
                 post.innerHTML = `
-                    <div class="post-header">
+                    <div class="section-header-content">
                         <img src="circleGTR.png" alt="Avatar" class="post-avatar">
                         <div class="post-author">
                             <strong>${entry.author}</strong> posted a new document.
