@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLIA 2 Ops - GTR Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="faviGTR.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+    body, html {
+      height: 0%;
+      margin: 0;
+    }
+
+    .header {
+        position: relative;
+        z-index: 1000;
+        background-color: white; /* atau warna solid yang sesuai */
+    }
+
+    .banner {
+        position: relative;
+        z-index: 1;
+        }
+
+    body {
+      /* Letakkan nama fail gambar anda di sini */
+      background-image: url('pictures/backgroundAA.png');
+
+      /* Untuk pastikan gambar penuh satu skrin */
+      background-size: cover;
+
+      /* Untuk letakkan gambar di tengah */
+      background-position: center;
+
+      /* Untuk elak gambar berulang-ulang */
+      background-repeat: no-repeat;
+
+      /* (Pilihan) Untuk buat gambar statik bila skrol */
+      background-attachment: fixed; 
+    }
+    
+    .main-navigation {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    .dropdown {
+  position: relative;
+  display: inline-block;
+    }
+
+    .dropdown a {
+  text-decoration: none;
+  color: rgb(0, 0, 0); /* tukar ikut tema */
+  padding: 8px 12px;
+    }
+
+    .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-radius: 6px;
+    } 
+
+    .dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+    }
+
+    .dropdown-content a:hover {
+  background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+  display: block;
+    }
+
+
+</style>
+    
+</head>
+<body>
+    <header class="new-header">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="header-logo"><img src="pictures/logoGTR.png" alt="GTR Logo"></a>
+                <nav class="main-navigation">
+                    <div class="dropdown">
+                        <a href="#">Memo <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="memo.html">Memo Archive</a>
+                            <a href="elibrary.html">E-Library</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#">Ramp <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="klia2ops.html">KLIA 2 Ops</a>
+                            <a href="#">FOCA Ops</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <button onclick="logout()" class="logout-button">Logout</button>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </button>
+            </div>
+        </div>
+        <!--<nav id="mobile-menu" class="mobile-nav">
+            <a href="index.html">Home</a>
+            <a href="memo.html">Memo Archive</a>
+            <a href="elibrary.html">E-Library</a>
+            <a href="klia2ops.html">KLIA 2 Ops</a>
+            <button onclick="logout()" class="logout-button-mobile">Logout</button>
+        </nav>-->
+    </header>
+
+    <div class="welcome-banner-container">
+        <img src="pictures/welcomeAA.jpg" alt="Welcome Banner">
+    </div>
+
+    <div class="main-content-wrapper">
+        <main class="feed-column">
+            <div class="hero-slider-container">
+                <div class="hero-slider-grid">
+                    <div class="hero-slide"><img src="pictures/GH2.jpg" alt="Ground Handling"></div>
+                    <div class="hero-slide"><img src="pictures/Marshalling.jpg" alt="Marshalling"></div>
+                </div>
+                <div class="hero-slider-dots"></div>
+            </div>
+
+            <article class="feed-post">
+                <div class="post-header">
+                    <img src="pictures/circleGTR.png" alt="Profile Picture" class="post-avatar">
+                    <div class="post-author">
+                        <strong>KLIA2 Ops Team</strong> posted an update.
+                        <span>Now!</span>
+                    </div>
+                </div>
+                <div class="post-body">
+                    <h3>Welcome to KLIA2 Operations Page</h3>
+                    <p>This is the central hub for all operational updates, documents, and tools related to KLIA2.</p>
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar-column">
+            <div class="widget">
+                <div class="widget-content">
+                    <p class="widget-subtitle">QUICK ACTIONS</p>
+                    <a href="#" class="widget-button full-width">Report Incident</a>
+                    <a href="#" class="widget-button full-width">Request OT</a>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-content">
+                    <p class="widget-subtitle">UPCOMING EVENTS</p>
+                    <ul class="event-list">
+                        <li>
+                            <div class="event-date"><span>AUG</span>05</div>
+                            <div class="event-details"><h4>Safety Briefing</h4><p>All Teams</p></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="main-footer">
+        <p>© <span id="current-year"></span> Ramp Data GTR. All Rights Reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
