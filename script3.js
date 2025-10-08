@@ -1,64 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Fungsi untuk memuatkan dan memaparkan entri dari data.json
-    async function loadLibraryEntries() {
+    // Fungsi untuk memuatkan dan memaparkan memo dari data2.json
+    async function loadMemoEntries() {
+        // [DIBAIKI] Menggunakan getElementById yang betul
         const container = document.getElementById('memo-container');
-        if (!container) return;
+        if (!container) {
+            console.error('Error: Element with id "memo-container" not found.');
+            return;
+        }
 
         try {
-            // Muat turun kandungan dari fail data.json
+            // Muat turun kandungan dari fail data2.json
             const response = await fetch('data2.json');
             if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
+                throw new Error('Network response was not ok: ' + response.statusText);
             }
             const entries = await response.json();
             
             container.innerHTML = ''; // Kosongkan mesej 'Loading'
 
             if (entries.length === 0) {
-                container.innerHTML = '<p>No documents found.</p>';
+                container.innerHTML = '<p>No memos found.</p>';
                 return;
             }
 
-            // Loop melalui setiap entri dan cipta elemen HTML
+            // Loop melalui setiap entri dan cipta elemen HTML yang betul
             entries.forEach(entry => {
-                const post = document.createElement('article');
-                post.className = 'content-post';
-                const date = new Date(entry.timestamp);
-                const timeAgo = getTimeAgo(date);
+                const memoItem = document.createElement('div');
+                memoItem.className = 'memo-item';
 
-                post.innerHTML = `
-                    <div class="section-header-content">
-                        <img src="circleGTR.png" alt="Avatar" class="post-avatar">
-                        <div class="post-author">
-                            <strong>${entry.author}</strong> posted a new document.
-                            <span>${timeAgo}</span>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <h3>${entry.title}</h3>
-                        <p>${entry.description}</p>
-                        <a href="${entry.fileLink}" class="btn-download-doc" target="_blank">View/Download</a>
-                    </div>
+                // Format tarikh
+                const formattedDate = formatDate(new Date(entry.timestamp));
+
+                // [DIBAIKI] Menggunakan struktur HTML yang betul untuk memo
+                memoItem.innerHTML = `
+                    <h4><span class="memo-date">${formattedDate}</span> | ${entry.title}</h4>
+                    <p>${entry.description}</p>
                 `;
-                container.appendChild(post);
+                container.appendChild(memoItem);
             });
 
         } catch (error) {
-            container.innerHTML = '<p>Error loading documents.</p>';
+            container.innerHTML = '<p style="color: red;">Error loading memos. Please check data2.json file and console.</p>';
             console.error('There has been a problem with your fetch operation:', error);
         }
     }
 
-    // Fungsi bantuan untuk paparan 'time ago'
-    function getTimeAgo(date) {
-        // ... (fungsi getTimeAgo yang sama seperti sebelum ini) ...
+    // Fungsi bantuan untuk memformat tarikh (cth: 16 Jul 2025)
+    function formatDate(date) {
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
+        return date.toLocaleDateString('en-GB', options).replace(/ /g, ' ');
     }
 
     // Panggil fungsi utama apabila halaman dimuatkan
-    loadLibraryEntries();
+    loadMemoEntries();
 
-    // ... (kod lain seperti untuk hamburger menu atau footer boleh diletak di sini) ...
+    // Set tahun semasa di footer
     const currentYearEl = document.getElementById('current-year');
     if (currentYearEl) {
         currentYearEl.textContent = new Date().getFullYear().toString();
