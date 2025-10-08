@@ -1,5 +1,11 @@
 [
   {
+    "author": "RAMP DATA",
+    "timestamp": "2025-10-08",
+    "title": "Memo Update System",
+    "description": "Testing Memo System Now."
+  },
+  {
     "author": "Admin",
     "timestamp": "2025-07-16",
     "title": "Kemas Kini Sistem",
@@ -24,3 +30,4 @@
     "description": "Selamat datang ke portal dashboard GTR yang baru! Portal ini direka untuk memudahkan akses kepada data dan maklumat terkini."
   }
 ]
+
