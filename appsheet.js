@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchData() {
         try {
-            const response = await fetch(API_URL);
+            const response = await fetch(API_URL, { mode: 'no-cors' });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -39,5 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData();
 
 });
+
 
 
