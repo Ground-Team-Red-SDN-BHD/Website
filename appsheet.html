@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTR Appsheet Display</title>
+    <link rel="stylesheet" href="appsheet.css">
+    <link rel="icon" href="faviGTR.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+
+    body, html {
+      height: 0%;
+      margin: 0;
+    }
+
+    .header {
+        position: relative;
+        z-index: 1000;
+        background-color: white; /* atau warna solid yang sesuai */
+    }
+
+    .banner {
+        position: relative;
+        z-index: 1;
+        }
+
+    body {
+      /* Letakkan nama fail gambar anda di sini */
+      background-image: url('pictures/backgroundAA.png');
+
+      /* Untuk pastikan gambar penuh satu skrin */
+      background-size: cover;
+
+      /* Untuk letakkan gambar di tengah */
+      background-position: center;
+
+      /* Untuk elak gambar berulang-ulang */
+      background-repeat: no-repeat;
+
+      /* (Pilihan) Untuk buat gambar statik bila skrol */
+      background-attachment: fixed; 
+    }
+    
+    .main-navigation {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    .dropdown {
+  position: relative;
+  display: inline-block;
+    }
+
+    .dropdown a {
+  text-decoration: none;
+  color: rgb(0, 0, 0); /* tukar ikut tema */
+  padding: 8px 12px;
+    }
+
+    .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+  border-radius: 6px;
+    } 
+
+    .dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+    }
+
+    .dropdown-content a:hover {
+  background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+  display: block;
+    }
+
+    /* === HEADER & NAVIGATION === */
+        .new-header { background-color: var(--card-background); border-bottom: 1px solid var(--border-color); padding: 0 24px; position: sticky; top: 0; z-index: 1000; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 64px; max-width: 1200px; margin: 0 auto; }
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .header-logo img { height: 35px; display: block; }
+        .main-navigation { display: flex; gap: 10px; }
+        .main-navigation a { color: var(--primary-text-color); text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 8px; font-size: 15px; display: flex; align-items: center; gap: 5px; }
+        .main-navigation a:hover { background-color: #f0f0f0; }
+        .dropdown { position: relative; }
+        .dropdown-toggle i { font-size: 0.7em; transition: transform 0.3s; }
+        .dropdown.active .dropdown-toggle i { transform: rotate(180deg); }
+        .dropdown-menu { display: none; position: absolute; background-color: white; min-width: 180px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; padding: 5px 0; z-index: 100; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; }
+        .dropdown.active .dropdown-menu { display: block; opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { color: var(--primary-text-color); padding: 10px 20px; text-decoration: none; display: block; font-size: 14px; }
+        .dropdown-menu a:hover { background-color: #f0f0f0; }
+        .hamburger-btn { display: none; }
+        .mobile-nav { display: none; }
+        
+    </style>
+
+<body>
+    <header class="new-header">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="header-logo"><img src="logoGTR.png" alt="GTR Logo"></a>
+                <nav class="main-navigation">
+                    <a href="index.html">Main Page</a>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle">Memo <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="elibrary.html">E-Library</a>
+                            <a href="formticket.html">Ticket Repairing</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </button>
+            </div>
+        </div>
+        <nav id="mobile-menu" class="mobile-nav">
+             <a href="index.html">Main Page</a>
+             <div class="dropdown">
+                <a href="#" class="dropdown-toggle">Memo <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <a href="elibrary.html">E-Library</a>
+                    <a href="formticket.html">Ticket Repairing</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="card-container" class="card-container">
+        <p>Loading data...</p>
+    </main>
+    <script src="appsheet.js"></script>
+</body>
+</html>
