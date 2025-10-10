@@ -37,4 +37,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchData();
+
 });
