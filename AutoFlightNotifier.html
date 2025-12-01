@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Status Notifier - API Ready</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configure Tailwind to respect the user's system preference for dark mode
+        tailwind.config = {
+            darkMode: 'media', // Use 'media' strategy for system preference
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Base background is set via Tailwind classes now */
+        }
+        /* Custom styles for components */
+        .card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .btn-primary {
+            background-color: #10b981; /* Emerald green */
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #059669;
+        }
+        .btn-secondary {
+            background-color: #3b82f6; /* Blue */
+            transition: background-color 0.2s;
+        }
+        .btn-secondary:hover {
+            background-color: #2563eb;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+
+    <div class="w-full max-w-4xl">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-gray-800 dark:text-white mb-2">Flight Status Notifier (API Ready)</h1>
+            <p class="text-lg text-gray-500 dark:text-gray-400">Use your secure proxy to autofill real-time flight data.</p>
+        </header>
+
+        <!-- Main Card Container -->
+        <div class="card bg-white dark:bg-gray-800 p-6 md:p-10 rounded-xl border border-gray-200 dark:border-gray-700 transition-colors duration-500">
+
+            <div id="input-section">
+                <h2 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-6 border-b pb-2 dark:border-gray-700">1. Input Flight Details</h2>
+                
+                <form id="flight-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Removed API Proxy URL input field -->
+
+
+                    <div>
+                        <label for="flight-number" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Flight Number (e.g., AK704)</label>
+                        <input type="text" id="flight-number" placeholder="Enter flight number" required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <div>
+                        <label for="city-pair" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Route (e.g., SYD to LHR) [AUTOFILLED]</label>
+                        <input type="text" id="city-pair" placeholder="e.g., SFO to NRT" required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <!-- Plane Registration (Will be autofilled) -->
+                    <div class="md:col-span-1">
+                        <label for="plane-registration" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Plane Registration (e.g., 9M-VAE) [AUTOFILLED]</label>
+                        <input type="text" id="plane-registration" placeholder="Autofilled from API"
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+                    
+                    <!-- Bay/Gate (Will be autofilled) -->
+                    <div class="md:col-span-1">
+                        <label for="bay-gate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bay / Gate Number (e.g., K6, C12) [AUTOFILLED]</label>
+                        <input type="text" id="bay-gate" placeholder="Autofilled from API"
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    
+                    <div> 
+                        <label for="message-type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message Type [AUTOFILLED]</label>
+                        <select id="message-type" 
+                                class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500 appearance-none">
+                            <option value="ETA" class="bg-white dark:bg-gray-700">ETA</option>
+                            <option value="STD" class="bg-white dark:bg-gray-700">STD</option>
+                            <option value="DELAYED_STD" class="bg-white dark:bg-gray-700">DELAYED STD</option>
+                        </select>
+                    </div>
+
+                    <!-- Flight Date Input - Value is set to today's date on load -->
+                    <div> 
+                        <label for="flight-date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Flight Date [FOR CONTEXT]</label>
+                        <input type="date" id="flight-date" required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <div class="md:col-span-1">
+                        <label for="time-value" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Time Value (HHMM Military Time, 24h) [AUTOFILLED]</label>
+                        <!-- Text input enforces 4-digit military time -->
+                        <input type="text" id="time-value" placeholder="Autofilled from API (e.g., 1110)" required maxlength="4"
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+                    
+                    <div class="md:col-span-1">
+                        <label for="whatsapp-target" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">WhatsApp Group/Contact Link</label>
+                        <input type="url" id="whatsapp-target" placeholder="Paste wa.me/number or Group Link here"
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">If empty, you will choose the contact after clicking Share.</p>
+                    </div>
+                    
+                    <!-- Recipient Handle/Mention -->
+                    <div class="md:col-span-2">
+                        <label for="recipient-handle" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Optional: Recipient Handle/Mention (Appears at the very bottom)</label>
+                        <input type="text" id="recipient-handle" placeholder="Add a recipient handle or instruction"
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+
+                    <div class="md:col-span-2 mt-4 flex justify-end">
+                        <button type="submit" id="submit-btn"
+                                class="btn-primary text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg flex items-center">
+                            <div id="btn-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 inline" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                                Fetch Data & Generate Message
+                            </div>
+                            <div id="btn-loader" class="loader hidden"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Output Section -->
+            <div id="output-section" class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700 hidden">
+                <h2 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-6">2. Generated Phrase & Sharing</h2>
+                
+                <!-- Generated Text Display -->
+                <div class="mb-6">
+                    <label for="generated-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Readable Status Phrase (Copy/Paste Ready):</label>
+                    <div class="relative">
+                        <textarea id="generated-message" rows="4" readonly
+                                  class="w-full p-4 border border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-900/50 rounded-lg text-lg text-gray-800 dark:text-gray-200 resize-none"></textarea>
+                        <button id="copy-text-btn" class="absolute top-2 right-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition" title="Copy to Clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button id="whatsapp-link-btn" 
+                            class="btn-primary flex-1 text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.031 3.175c-4.825 0-8.73 3.905-8.73 8.73 0 1.956.634 3.766 1.72 5.253L3 21l3.865-1.071c1.42.78 3.056 1.205 4.166 1.205h.001c4.825 0 8.73-3.905 8.73-8.73s-3.905-8.73-8.73-8.73zM16.92 15.655c-.24-.12-.482-.19-.74-.23-1.018-.15-2.45-.63-2.78-1.74-.32-1.11-.8-2.61-.48-3.94.32-1.33 1.76-2.02 2.78-2.17.25-.04.49-.07.74-.07.25 0 .5-.01.75.26.25.26.26.54.26.75.0 1.07-.48 2.08-.96 3.16-.48 1.08-1.06 2.16-1.54 3.24-.48 1.08-.24 2.16-.48 3.24-.24.78-1.28.39-1.54-.39-.26-1.17-.48-2.34-.48-3.51 0-.17.06-.34.19-.5z"/>
+                        </svg>
+                        Share via WhatsApp
+                    </button>
+
+                    <a id="fr24-link-anchor" href="#" target="_blank"
+                       class="btn-secondary flex-1 text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg flex items-center justify-center">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M11 3a1 1 0 100 2h3.586l-11.5 11.5a1 1 0 101.414 1.414L16 6.414V10a1 1 0 102 0V4a2 2 0 00-2-2h-6z" />
+                        </svg>
+                        View Live Status on FR24
+                    </a>
+                </div>
+
+                <!-- Custom Modal for Errors/Notifications (Replacing alert()) -->
+                <div id="app-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-2xl max-w-sm w-full">
+                        <h3 id="modal-title" class="text-xl font-bold text-gray-800 dark:text-white mb-4">Notification</h3>
+                        <p id="modal-message" class="text-gray-600 dark:text-gray-300 mb-6"></p>
+                        <button id="close-modal-btn" class="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- HARDCODED CONFIGURATION ---
+        // IMPORTANT: Replace the placeholder below with the URL of your secure API proxy server.
+        // This hides the URL from the dashboard but keeps the API fetch functionality active.
+        const API_PROXY_URL = 'https://fr24api.flightradar24.com/api/static/airlines/AAL/light';
+        // -------------------------------
+
+        // Set up references to elements
+        const form = document.getElementById('flight-form');
+        const outputSection = document.getElementById('output-section');
+        const generatedMessageArea = document.getElementById('generated-message');
+        const copyBtn = document.getElementById('copy-text-btn');
+        const whatsappBtn = document.getElementById('whatsapp-link-btn');
+        const fr24LinkAnchor = document.getElementById('fr24-link-anchor');
+        const modal = document.getElementById('app-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const flightDateInput = document.getElementById('flight-date'); 
+        const whatsappTargetInput = document.getElementById('whatsapp-target');
+        const recipientHandleInput = document.getElementById('recipient-handle');
+        const planeRegistrationInput = document.getElementById('plane-registration');
+        const bayGateInput = document.getElementById('bay-gate');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnLoader = document.getElementById('btn-loader');
+        const timeValueInput = document.getElementById('time-value');
+        const messageTypeInput = document.getElementById('message-type');
+        const cityPairInput = document.getElementById('city-pair');
+
+
+        // --- Initialization: Set Default Date ---
+        (function setDefaultDate() {
+            const today = new Date();
+            // Format date as YYYY-MM-DD for input type="date"
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const day = String(today.getDate()).padStart(2, '0');
+            
+            flightDateInput.value = `${year}-${month}-${day}`;
+        })();
+        // --- End Initialization ---
+
+
+        // --- Helper Functions ---
+
+        /**
+         * Shows a custom modal notification.
+         * @param {string} title
+         * @param {string} message
+         */
+        function showModal(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modal.classList.remove('hidden');
+        }
+
+        // Event listener for closing the modal
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        // Toggle loading state on the button
+        function setLoading(isLoading) {
+            submitBtn.disabled = isLoading;
+            if (isLoading) {
+                btnText.classList.add('hidden');
+                btnLoader.classList.remove('hidden');
+            } else {
+                btnText.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+            }
+        }
+
+
+        // --- API & Autofill Logic ---
+
+        /**
+         * Fetches real-time flight data from the user's secure proxy with exponential backoff.
+         */
+        async function fetchFlightData(apiUrl, flightNumber) {
+            const maxRetries = 3;
+            let currentDelay = 1000; // Start with 1 second delay
+            
+            // Validation: Check if the user set their proxy URL
+            if (apiUrl === 'REPLACE_WITH_YOUR_SECURE_PROXY_URL') {
+                throw new Error("API Proxy URL is not configured. Please edit the script to set 'API_PROXY_URL'.");
+            }
+            
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ flightNumber: flightNumber })
+                    });
+
+                    if (response.status === 429) { // Too many requests
+                        throw new Error('Rate limit exceeded');
+                    }
+                    if (!response.ok) {
+                        throw new Error(`Server returned status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    return data;
+
+                } catch (error) {
+                    console.error(`Attempt ${i + 1} failed:`, error.message);
+                    if (i === maxRetries - 1) {
+                        throw new Error('Failed to retrieve flight data after multiple retries. Check your proxy server and FR24 API connection.');
+                    }
+                    // Exponential backoff
+                    await new Promise(resolve => setTimeout(resolve, currentDelay));
+                    currentDelay *= 2; 
+                }
+            }
+        }
+
+        /**
+         * Simulates autofilling fields with mocked data. In a real app, you would
+         * process the actual JSON response here.
+         */
+        function autofillFields(data) {
+            // Mock Data Structure based on common FR24 API responses
+            // In a real application, you would map:
+            // planeRegistrationInput.value = data.registration
+            // bayGateInput.value = data.bayGate
+            // etc.
+            const flightData = data.realTime || {
+                registration: "A6-XXY",
+                bayGate: "B07",
+                route: "DXB to NRT",
+                liveTime: "1745", // HHMM military time
+                status: "ETA"
+            };
+
+            // 1. Populate fields with the fetched data
+            planeRegistrationInput.value = flightData.registration;
+            bayGateInput.value = flightData.bayGate;
+            cityPairInput.value = flightData.route;
+            timeValueInput.value = flightData.liveTime;
+            messageTypeInput.value = flightData.status;
+
+            // 2. Run the message generation after autofill
+            const flightNumber = document.getElementById('flight-number').value.trim();
+            const cityPair = cityPairInput.value.trim();
+            const dateValue = document.getElementById('flight-date').value;
+            const timeValue = timeValueInput.value.trim();
+            const messageType = messageTypeInput.value;
+            const whatsappTarget = whatsappTargetInput.value.trim(); 
+            const recipientHandle = recipientHandleInput.value.trim(); 
+            const planeRegistration = planeRegistrationInput.value.trim();
+            const bayGate = bayGateInput.value.trim(); 
+
+            const generatedPhrase = generatePhrase(
+                flightNumber, cityPair, timeValue, dateValue, messageType, 
+                recipientHandle, planeRegistration, bayGate
+            );
+
+            generatedMessageArea.value = generatedPhrase;
+            outputSection.classList.remove('hidden');
+            setupSharingLinks(generatedPhrase, flightNumber, whatsappTarget);
+
+            showModal("Success", `Flight data for ${flightNumber} fetched and fields have been autofilled.`);
+        }
+
+
+        // --- Core Logic: Message Generation ---
+
+        /**
+         * Generates the readable phrase based on input data.
+         */
+        function generatePhrase(flightNumber, cityPair, timeValue, dateValue, messageType, recipientHandle, planeRegistration, bayGate) {
+            // Convert requested values to UPPERCASE
+            const time = timeValue; 
+            const flight = flightNumber.toUpperCase();
+            const registration = planeRegistration.toUpperCase();
+            const bay = bayGate.toUpperCase(); 
+            
+            // Format messageType for display (e.g., DELAYED_STD -> DELAYED STD)
+            const type = messageType.toUpperCase().replace('_', ' '); 
+            
+            // Start the phrase clean
+            let phrase = ''; 
+
+            // Conciseness: REG, BAY, FLIGHT // TYPE, TIME
+            // Using multiple spaces for visual separation, mimicking the log format
+            phrase += `${registration}    ${bay}    ${flight}    //    ${type}    ${time}`; 
+            
+            // --- ADD NEW OPERATIONAL INSTRUCTIONS BLOCK ---
+            phrase += `\n\nTEAM VDGS KINDLY STANDBY\nANY CLASHING KINDLY INFORM ASAP\nPLS UPDATE TIMING ONCHOCK`;
+            
+            // --- Recipient Handle (Optional, last element) ---
+            if (recipientHandle) {
+                // Add two blank lines and then the handle in UPPERCASE
+                phrase += `\n\n${recipientHandle.toUpperCase()}`;
+            }
+
+            return phrase;
+        }
+
+        // --- Event Handlers ---
+
+        // 1. Form Submission: Fetch Data & Generate Message
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const flightNumber = document.getElementById('flight-number').value.trim();
+
+            if (!flightNumber) {
+                showModal("Input Error", "Please provide the Flight Number to fetch data.");
+                return;
+            }
+
+            setLoading(true);
+            try {
+                // Step 1: Fetch data from the user's proxy server using the hardcoded URL
+                const data = await fetchFlightData(API_PROXY_URL, flightNumber);
+                
+                // Step 2: Autofill fields and generate message
+                autofillFields(data);
+                
+            } catch (error) {
+                // Handle API fetching errors
+                showModal("API Connection Error", error.message);
+                outputSection.classList.add('hidden'); // Hide results on error
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        // 2. Button: Copy Text to Clipboard
+        copyBtn.addEventListener('click', function() {
+            const textToCopy = generatedMessageArea.value;
+
+            // Use document.execCommand('copy') for better iframe compatibility
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                const msg = successful ? 'The phrase has been successfully copied to your clipboard!' : 'Copy failed. Please copy the text manually.';
+                showModal("Copy Status", msg);
+            } catch (err) {
+                showModal("Copy Status", 'Copy failed. Please copy the text manually.');
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        });
+
+
+        /**
+         * Sets up the dynamic WhatsApp and FR24 links based on generated content.
+         */
+        function setupSharingLinks(phrase, flightNumber, whatsappTarget) {
+            // WhatsApp Link Generation
+            const whatsappText = encodeURIComponent(phrase);
+            let whatsappUrl;
+
+            // Check if a specific target (group or contact) is provided
+            if (whatsappTarget.includes('chat.whatsapp.com') || whatsappTarget.includes('wa.me')) {
+                // If a specific target link is provided, use it as the base.
+                whatsappUrl = `${whatsappTarget.replace(/\/$/, '')}?text=${whatsappText}`; 
+            } else {
+                // FALLBACK: Use the requested api.whatsapp.com structure for generic sharing
+                whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
+            }
+
+            whatsappBtn.href = whatsappUrl;
+            whatsappBtn.onclick = () => window.open(whatsappUrl, '_blank');
+
+            // Update button text to reflect direct group targeting if a link is provided
+            if (whatsappTarget) {
+                whatsappBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.031 3.175c-4.825 0-8.73 3.905-8.73 8.73 0 1.956.634 3.766 1.72 5.253L3 21l3.865-1.071c1.42.78 3.056 1.205 4.166 1.205h.001c4.825 0 8.73-3.905 8.73-8.73s-3.905-8.73-8.73-8.73zM16.92 15.655c-.24-.12-.482-.19-.74-.23-1.018-.15-2.45-.63-2.78-1.74-.32-1.11-.8-2.61-.48-3.94.32-1.33 1.76-2.02 2.78-2.17.25-.04.49-.07.74-.07.25 0 .5-.01.75.26.25.26.26.54.26.75.0 1.07-.48 2.08-.96 3.16-.48 1.08-1.06 2.16-1.54 3.24-.48 1.08-.24 2.16-.48 3.24-.24.78-1.28.39-1.54-.39-.26-1.17-.48-2.34-.48-3.51 0-.17.06-.34.19-.5z"/>
+                    </svg>
+                    Send to Specified Group/Contact
+                `;
+            } else {
+                 whatsappBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.031 3.175c-4.825 0-8.73 3.905-8.73 8.73 0 1.956.634 3.766 1.72 5.253L3 21l3.865-1.071c1.42.78 3.056 1.205 4.166 1.205h.001c4.825 0 8.73-3.905 8.73-8.73s-3.905-8.73-8.73-8.73zM16.92 15.655c-.24-.12-.482-.19-.74-.23-1.018-.15-2.45-.63-2.78-1.74-.32-1.11-.8-2.61-.48-3.94.32-1.33 1.76-2.02 2.78-2.17.25-.04.49-.07.74-.07.25 0 .5-.01.75.26.25.26.26.54.26.75.0 1.07-.48 2.08-.96 3.16-.48 1.08-1.06 2.16-1.54 3.24-.48 1.08-.24 2.16-.48 3.24-.24.78-1.28.39-1.54-.39-.26-1.17-.48-2.34-.48-3.51 0-.17.06-.34.19-.5z"/>
+                    </svg>
+                    Share via WhatsApp
+                `;
+            }
+
+
+            // Flightradar24 Direct Link Generation (External Link)
+            const fr24Url = `https://www.flightradar24.com/data/${encodeURIComponent(flightNumber)}`;
+            fr24LinkAnchor.href = fr24Url;
+        }
+
+    </script>
+</body>
+</html>
