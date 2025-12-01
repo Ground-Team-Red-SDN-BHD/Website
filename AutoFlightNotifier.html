@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -209,7 +209,7 @@
         // --- HARDCODED CONFIGURATION ---
         // IMPORTANT: Replace the placeholder below with the URL of your secure API proxy server.
         // This hides the URL from the dashboard but keeps the API fetch functionality active.
-        const API_PROXY_URL = 'https://fr24api.flightradar24.com/api/static/airlines/AAL/light';
+        const API_PROXY_URL = 'https://fr24api.flightradar24.com/api/live/flight-positions/full?bounds=50.682,46.218,14.422,22.243';
         // -------------------------------
 
         // Set up references to elements
@@ -290,7 +290,7 @@
             let currentDelay = 1000; // Start with 1 second delay
             
             // Validation: Check if the user set their proxy URL
-            if (apiUrl === 'REPLACE_WITH_YOUR_SECURE_PROXY_URL') {
+            if (apiUrl === 'https://fr24api.flightradar24.com/api/live/flight-positions/full?bounds=50.682,46.218,14.422,22.243') {
                 throw new Error("API Proxy URL is not configured. Please edit the script to set 'API_PROXY_URL'.");
             }
             
